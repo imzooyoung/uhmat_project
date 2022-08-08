@@ -12,7 +12,7 @@
 	<!-- 게시글 등록 -->
 	<h3>어맛? 주절주절</h3>
 	<section>
-		<form action="TmiWritePro.co" method="POST" name=tmiBoardForm>
+		<form action="TmiWritePro.co" name=tmiBoardForm method="POST">
 		<table>
 			<tr>
 				<td><label for="nickname">어맛인</label></td>
@@ -21,7 +21,7 @@
 				
 			<tr>
 				<td><label for ="subject">제목</label></td>
-				<td><input type="text" name="subject" id="ubject" required="required" ></td>
+				<td><input type="text" name="subject" id="subject" required="required" ></td>
 			</tr>
 				
 			<tr>

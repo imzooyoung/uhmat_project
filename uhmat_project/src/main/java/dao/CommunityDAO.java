@@ -213,6 +213,64 @@ public class CommunityDAO {
 			close(pstmt);
 		}
 	}
+
+	// 글 수정, 삭제 권한 판별을 수행하는 isTmiWriter() 메서드 정의
+	public boolean isTmiWriter(int idx, String nickname) {
+		boolean isTmiWriter = false;
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			String sql = "SELECT * FROM community_tmi WHERE idx=? AND nickname=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, idx);
+			pstmt.setString(2, nickname);
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				// 조회 결과 있을 시 번호에 해당하는 닉네임이 일치
+				isTmiWriter = true;
+			}
+			
+		} catch (SQLException e) {
+			System.out.println("SQL 구문 오류 발생! - isTmiWriter()" + e.getMessage());
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rs);
+		}
+		
+		return isTmiWriter;
+	}
+
+	// 글 수정 작업을 수행하는 updateTmiBoard() 메서드 정의
+	public int updateTmiBoard(CommunityTmiDTO tmiBoard) {
+		int updateTmiCount = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		try {
+			String sql = "UPDATE community_tmi SET nickname=?,subject=?,content=? WHERE idx=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, tmiBoard.getNickname());
+			pstmt.setString(2, tmiBoard.getSubject());
+			pstmt.setString(3, tmiBoard.getContent());
+			pstmt.setInt(4, tmiBoard.getIdx());
+			
+			updateTmiCount = pstmt.executeUpdate();
+			System.out.println(updateTmiCount);
+			
+		} catch (SQLException e) {
+			System.out.println("SQL 구문 오류 발생! - updateTmiBoard()" + e.getMessage());
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return updateTmiCount;
+	}
 		
 }
 	

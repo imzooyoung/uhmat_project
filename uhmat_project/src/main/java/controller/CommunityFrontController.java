@@ -13,6 +13,8 @@ import action.Action;
 import action.MateWriteProAction;
 import action.TmiDetailAction;
 import action.TmiListAction;
+import action.TmiModifyFormAction;
+import action.TmiModifyProAction;
 import action.TmiWirteProAction;
 import vo.ActionForward;
 
@@ -46,22 +48,7 @@ public class CommunityFrontController extends HttpServlet {
 		
 		// 추출된 서블릿 주소를 if문을 사용하여 판별하고 각 주소에 따른 액션(작업) 요청
 		// 글쓰기 폼을 요청하는 서블릿(/MateWriteForm.co) 요청
-		if(command.equals("/MateWriteForm.co")) {
-			forward = new ActionForward();
-			forward.setPath("community/mateWrite.jsp");
-			forward.setRedirect(false);
-			
-		} else if(command.equals("/mateWritePro.co")) {
-			//MateWriteProAction 클래스 인스턴스 생성 후 execute() 메서드 호출
-			try {
-				action = new MateWriteProAction();
-				forward = action.execute(request, response);
-			} catch (Exception e) {
-				System.out.println("MateWriteProAction 오류 - " + e.getMessage());
-				e.printStackTrace();
-			}
-			
-		}else if (command.equals("/TmiList.co")) {
+		if(command.equals("/TmiList.co")) {
 			// tmi 게시판 글 전체 목록 조회
 			try {
 				action = new TmiListAction();
@@ -72,12 +59,13 @@ public class CommunityFrontController extends HttpServlet {
 			}
 			
 		} else if(command.equals("/TmiWriteForm.co")) {
-			//TmiWriteProAction 클래스 인스턴스 생성 후 execute() 메서드 호출
+			// tmi 게시판의 글 쓰기 작업
 			forward = new ActionForward();
 			forward.setPath("community/tmiWrite.jsp");
 			forward.setRedirect(false);
 			
 		} else if(command.equals("/TmiWritePro.co")) {
+			// tmi 게시판의 글 쓰기 작업을 요청
 			try {
 				action = new TmiWirteProAction();
 				forward = action.execute(request, response);
@@ -87,7 +75,7 @@ public class CommunityFrontController extends HttpServlet {
 			}
 			
 		} else if(command.equals("/TmiDetail.co")) {
-			// TmiDetailAction 클래스 인스턴스 생성 후 execute() 메서드 호출
+			// tmi 게시글 상세내용 보기
 			try {
 				action = new TmiDetailAction();
 				forward = action.execute(request, response);
@@ -96,6 +84,24 @@ public class CommunityFrontController extends HttpServlet {
 				e.printStackTrace();
 			}
 			
+		} else if(command.equals("/TmiModifyForm.co")) {
+			// tmi 게시글의 글 수정 작업에 필요한 게시물 조회
+			try {
+				action = new TmiModifyFormAction();
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				System.out.println("TmiModifyFormAction 오류 - " + e.getMessage());
+				e.printStackTrace();
+			}
+		} else if(command.equals("/TmiModifyPro.co")) {
+			// tmi 게시글의 글 수정 작업을 요청하는 작업
+			try {
+				action = new TmiModifyProAction();
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				System.out.println("TmiModifyProAction 오류 - " + e.getMessage());
+				e.printStackTrace();
+			}
 		}
 		
 		// ------------------------------------------------------------------
