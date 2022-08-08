@@ -9,7 +9,9 @@ public class PageInfo {
 	private int startPage;
 	private int listCount;
 	
+
 	public PageInfo(int pageNum, int maxPage, int startPage, int endPage, int listCount) {
+
 		super();
 		PageNum = pageNum;
 		this.maxPage = maxPage;

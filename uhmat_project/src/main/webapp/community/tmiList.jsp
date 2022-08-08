@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,6 +10,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+<<<<<<< HEAD
 	<!-- 헤더 자리 -->
 	
 	<!-- 탭 형식의 커뮤니티페이지 내의 서브 페이지 -->
@@ -75,5 +78,8 @@
 	</section>
 	<!-- 푸터 자리 -->
 	
+=======
+
+>>>>>>> a2a3a0310d070d829e3d33e73e9ea1667874fc76
 </body>
 </html>

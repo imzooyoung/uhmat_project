@@ -1,5 +1,6 @@
 package action;
 
+
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
@@ -10,23 +11,27 @@ import vo.ActionForward;
 import vo.CommunityTmiDTO;
 import vo.PageInfo;
 
+
 public class TmiListAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		System.out.println("TmiListAction");
-		
+
 		ActionForward forward = null;
 		
 		// 페이징 처리를 위한 변수 선언
 		int pageNum = 1;
+
 		int listLimit = 10;
+
 		int pageLimit = 10;
 		
 		// 단, URL 파라미터로 현재 페이지번호(pageNum)이 전달됐을 경우 가져와서 변수에 저장
 		if(request.getParameter("pageNum") != null) {
 			pageNum = Integer.parseInt(request.getParameter("pageNum"));
 		}
+
 		// 페이징 처리에 필요한 전체 게시물 갯수 조회 작업을 요청합니다.
 		// => TmiListService 클래스 인스턴스 생성 후 getTmiListCount() 메서드를 호출하여 총 게시물 수를 조회합니다.
 		// => 파라미터 : X (없음), 리턴타입 : int(tmiListCount)
@@ -73,6 +78,7 @@ public class TmiListAction implements Action {
 		forward = new ActionForward();
 		forward.setPath("community/tmiList.jsp");
 		forward.setRedirect(false);
+
 		
 		return forward;
 	}
