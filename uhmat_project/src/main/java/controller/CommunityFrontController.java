@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import action.Action;
 import action.MateWriteProAction;
+import action.TmiDeleteProAction;
 import action.TmiDetailAction;
 import action.TmiListAction;
 import action.TmiModifyFormAction;
@@ -100,6 +101,18 @@ public class CommunityFrontController extends HttpServlet {
 				forward = action.execute(request, response);
 			} catch (Exception e) {
 				System.out.println("TmiModifyProAction 오류 - " + e.getMessage());
+				e.printStackTrace();
+			}
+		} else if(command.equals("/TmiDeleteForm.co")) {
+			forward = new ActionForward();
+			forward.setPath("community/tmiDelete.jsp");
+			forward.setRedirect(false);
+		} else if(command.equals("/TmiDeletePro.co")) {
+			try {
+				action = new TmiDeleteProAction();
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				System.out.println("TmiDeleteProAction 오류 - " + e.getMessage());
 				e.printStackTrace();
 			}
 		}

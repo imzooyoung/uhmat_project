@@ -11,8 +11,6 @@
 </head>
 <body>
 
-<h3>hello, it's me</h3>
-
  <div id="naver_id_login"></div>
  
   <!-- //네이버아이디로로그인 버튼 노출 영역 -->

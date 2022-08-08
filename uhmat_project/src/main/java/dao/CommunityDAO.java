@@ -501,6 +501,7 @@ public class CommunityDAO {
 
 	// 글 수정, 삭제 권한 판별을 수행하는 isTmiWriter() 메서드 정의
 	public boolean isTmiWriter(int idx, String nickname) {
+		System.out.println("CommunityDAO - isTmiWriter() 호출!");
 		boolean isTmiWriter = false;
 		
 		PreparedStatement pstmt = null;
@@ -532,6 +533,7 @@ public class CommunityDAO {
 
 	// 글 수정 작업을 수행하는 updateTmiBoard() 메서드 정의
 	public int updateTmiBoard(CommunityTmiDTO tmiBoard) {
+		System.out.println("CommunityDAO - updateTmiBoard() 호출!");
 		int updateTmiCount = 0;
 		
 		PreparedStatement pstmt = null;
@@ -555,6 +557,26 @@ public class CommunityDAO {
 		}
 		
 		return updateTmiCount;
+	}
+
+	public int deleteTmiBoard(int idx) {
+		System.out.println("CommunityDAO - deleteTmiBoard() 호출!");
+		int deleteTmiCount = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		try {
+			String sql = "DELETE FROM community_tmi WHERE idx=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, idx);
+			
+			deleteTmiCount = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			System.out.println("SQL 구문 오류 - deleteTmiBoard() : " + e.getMessage());
+			e.printStackTrace();
+		}
+		
+		return deleteTmiCount;
 	}
 		
 }
