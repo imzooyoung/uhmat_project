@@ -56,8 +56,5 @@
 <br>
 <h3><a href="TmiList.co">어맛Tmi 글목록</a></h3>
 
-
-
-
 </body>
 </html>   
