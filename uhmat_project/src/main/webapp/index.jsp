@@ -54,7 +54,7 @@
  	</details>
  </nav>
 
-<h1>테스트</h1>
+
 
 <h3> <a href="NoticeList.sc">Notice</a></h3>
 <h3> <a href="FAQList.sc">FAQ</a></h3>
