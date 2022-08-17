@@ -118,6 +118,7 @@
 		</c:choose>
 			
 		<!-- 페이지 번호 목록은 시작 페이지(startPage)부터 끝 페이지(endPage) 까지 표시 -->
+
 		<c:forEach var="i" begin="${pageInfo.startPage }" end="${pageInfo.endPage }">
 			<!-- 단, 현재 페이지 번호는 링크 없이 표시 -->
 			<c:choose>
@@ -126,6 +127,7 @@
 				</c:when>
 				<c:otherwise>
 					<a href="NoticeList.sc?pageNum=${i }">${i }</a>
+
 				</c:otherwise>
 			</c:choose>
 		</c:forEach>

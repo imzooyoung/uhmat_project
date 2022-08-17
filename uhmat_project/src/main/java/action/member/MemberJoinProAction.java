@@ -16,13 +16,11 @@ public class MemberJoinProAction implements Action {
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		ActionForward forward =null;
-		
-		
 		 String email= request.getParameter("email");
 		 String name=request.getParameter("name");
 		 String passwd= request.getParameter("passwd");
 		 String nickName= request.getParameter("nickName");
-		 String birthdate= request.getParameter("birth");
+		 Date birthdate= Date.valueOf(request.getParameter("birth"));
 		 String postCode= request.getParameter("postCode");
 		 String address1=request.getParameter("address1");
 		 String address2=request.getParameter("address2");
@@ -35,6 +33,7 @@ public class MemberJoinProAction implements Action {
 		 member.setPostCode(postCode);
 		 member.setAddress1(address1); 
 		 member.setAddress2(address2);
+		 member.setAuth_status("N");
 		 System.out.println(member.toString());
 		 MemberJoinProService service = new MemberJoinProService();
 		 boolean isJoinSuccess = service.joinMember(member);
@@ -53,11 +52,7 @@ public class MemberJoinProAction implements Action {
 			}
 			
 			return forward;
-		
-		
-		
-		
-	
+
 	}
 
 }

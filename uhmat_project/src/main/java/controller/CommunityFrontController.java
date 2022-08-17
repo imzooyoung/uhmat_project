@@ -1,5 +1,7 @@
 package controller;
 
+
+
 import java.io.IOException;
 
 import javax.servlet.RequestDispatcher;
@@ -10,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import action.Action;
+
 import action.MateDeleteProAction;
 import action.MateDetailAction;
 import action.MateListAction;
@@ -31,6 +34,7 @@ import action.TmiRereplyWriteProAction;
 import action.TmiWriteProAction;
 import vo.ActionForward;
 
+
 // 어맛커뮤니티의 FrontController
 /*
  * 1. 리스트
@@ -43,6 +47,7 @@ import vo.ActionForward;
  */
 
 @WebServlet("*.co")
+
 public class CommunityFrontController extends HttpServlet {
 	protected void doProcess(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("CommunityFrontController");
@@ -59,18 +64,22 @@ public class CommunityFrontController extends HttpServlet {
 		// 포워딩 정보를 관리하는 ActionForward 타입 변수 선언
 		ActionForward forward = null;
 		
+
 		// 추출된 서블릿 주소를 if문을 사용하여 판별하고 각 주소에 따른 액션(작업) 요청
 		// 글쓰기 폼을 요청하는 서블릿(/MateWriteForm.co) 요청
 		// 리스트를 요청하는 서블릿(/MateListForm.co) 요청
 		if(command.equals("/MateList.co")) {
 			action = new MateListAction();
+
 			try {
+				action = new TmiListAction();
 				forward = action.execute(request, response);
 			} catch (Exception e) {
-				System.out.println("MateListProAction 오류 - " + e.getMessage());
+				System.out.println("TmiListAction 오류 - " + e.getMessage());
 				e.printStackTrace();
 			}
 			
+
 		// -----------------------------------------------------------------	
 		// 글쓰기 폼을 요청하는 서블릿(/MateWriteForm.co) 요청
 		} else if(command.equals("/MateWriteForm.co")) {
@@ -83,10 +92,23 @@ public class CommunityFrontController extends HttpServlet {
 
 			action = new MateWriteProAction();
 			try {
+
 				forward = action.execute(request, response);
 			} catch (Exception e) {
-				System.out.println("MateWriteProAction 오류 - " + e.getMessage());
+				System.out.println("TmiWriteProAction 오류 - " + e.getMessage());
+
 				e.printStackTrace();
+
+						}
+		} else if(command.equals("/MateWritePro.mate")) {
+			action = new MateWriteProAction();
+			try {
+
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				System.out.println("TmiWriteProAction 오류 - " + e.getMessage());
+				e.printStackTrace();
+
 						}
 		// ------------------------------------------------------------------
 		// 글 디테일 뷰를 요청하는 서블릿(/MateDetail.co) 요청
@@ -96,6 +118,18 @@ public class CommunityFrontController extends HttpServlet {
 				forward = action.execute(request, response);
 			} catch (Exception e) {
 				System.out.println("MateDetailAction 오류 - " + e.getMessage());
+
+				e.printStackTrace();
+
+			}
+			
+		} else if(command.equals("/TmiDetail.co")) {
+			// tmi 게시글 상세내용 보기
+			try {
+				action = new TmiDetailAction();
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				System.out.println("TmiDetailAction 오류 - " + e.getMessage());
 				e.printStackTrace();
 			}
 		// -----------------------------------------------------------------------
@@ -124,6 +158,7 @@ public class CommunityFrontController extends HttpServlet {
 			forward.setPath("community/mate/mate_delete.jsp");
 			forward.setRedirect(false);
 			
+
 		} else if(command.equals("/MateDeletePro.co")) {
 			action = new MateDeleteProAction();
 			try {
@@ -203,6 +238,7 @@ public class CommunityFrontController extends HttpServlet {
 			
 		} else if(command.equals("/TmiModifyForm.co")) {
 			System.out.println("게시물 수정 조회");
+
 			try {
 				action = new TmiModifyFormAction();
 				forward = action.execute(request, response);
@@ -210,9 +246,11 @@ public class CommunityFrontController extends HttpServlet {
 				System.out.println("TmiModifyFormAction 오류 - " + e.getMessage());
 				e.printStackTrace();
 			}
+
 			
 		} else if(command.equals("/TmiModifyPro.co")) {
 			System.out.println("게시글 수정 요청");
+
 			try {
 				action = new TmiModifyProAction();
 				forward = action.execute(request, response);
@@ -220,6 +258,7 @@ public class CommunityFrontController extends HttpServlet {
 				System.out.println("TmiModifyProAction 오류 - " + e.getMessage());
 				e.printStackTrace();
 			}
+
 			
 		} else if(command.equals("/TmiDeleteForm.co")) {
 			System.out.println("게시물 삭제 조회");
@@ -324,6 +363,7 @@ public class CommunityFrontController extends HttpServlet {
 		// ActionFoward 객체에 저장된 포워딩 정보에 따른 포워딩 작업을 수행하기 위한 공통코드 작성
 		if(forward != null) {
 			if(forward.isRedirect()) {
+
 				response.sendRedirect(forward.getPath());
 			} else {
 				RequestDispatcher dispatcher = request.getRequestDispatcher(forward.getPath());
@@ -343,3 +383,4 @@ public class CommunityFrontController extends HttpServlet {
 	}
 
 }
+

@@ -3,17 +3,18 @@ package svc;
 import static db.JdbcUtil.getConnection;
 
 import java.sql.Connection;
+
 import java.util.ArrayList;
 
 import dao.CommunityDAO;
 import vo.CommunityTmiDTO;
 import vo.TmiReplyDTO;
 
+
 import static db.JdbcUtil.*;
 
 public class TmiDetailService {
 
-	
 	public CommunityTmiDTO getTmiBoard(int idx) {
 		System.out.println("TmiDetailService - CommunityTmiDTO");
 		CommunityTmiDTO tmiBoard = null;
@@ -39,7 +40,9 @@ public class TmiDetailService {
 		return tmiBoard;
 	}
 
+
 	// tmi 게시글 조회수 증가
+
 	public void tmiIncreaseReadcount(int idx) {
 		System.out.println("TmiDetailService - tmiIncreaseReadcount");
 		
@@ -65,6 +68,7 @@ public class TmiDetailService {
 		close(con);
 				
 	}
+
 
 	// 댓글 리스트
 	public ArrayList<TmiReplyDTO> getTmiReplyList(int idx) {
@@ -126,6 +130,6 @@ public class TmiDetailService {
 		
 		return tmiRereplyList;
 	}
-	
+
 	
 }

@@ -10,7 +10,8 @@ import dao.MemberDAO;
 public class MemberCheckDuplicateNickNameService {
 
 	public boolean checkDuplicateNickName(String nickName) {
-boolean isDuplicate = false;
+
+		boolean isDuplicate = false;
 		
 		Connection con = getConnection();
 		MemberDAO dao = MemberDAO.getInstance();
