@@ -25,6 +25,12 @@
 <iframe name="iframe1" id="iframe1" src="MemberGoogleForm.me"  frameborder="0" cellspacing="0"></iframe>
 </div>
 
+<div>
+<iframe name="iframe1" id="iframe1" src="MemberNaverForm.me"  frameborder="0" cellspacing="0"></iframe>
+<iframe name="iframe1" id="iframe1" src="MemberKakaoForm.me"  frameborder="0" cellspacing="0"></iframe>
+<iframe name="iframe1" id="iframe1" src="MemberGoogleForm.me"  frameborder="0" cellspacing="0"></iframe>
+</div>
+
 
 <c:choose>
 			<c:when test="${empty sessionScope.sEmail}">
@@ -38,6 +44,7 @@
 			</c:otherwise>
 </c:choose>
 <hr>
+
  <nav>
  	<details> <!-- 음식카테고리 리스트 -->
  		<summary>음식카테고리</summary>
@@ -56,6 +63,7 @@
 <h3><a href="RecipeWriteForm.co">어맛레시피 쓰기</a></h3>
 <br>
 <h3><a href="TmiList.co">어맛Tmi 글목록</a></h3>
+
 
 </body>
 </html>   

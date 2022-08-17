@@ -28,6 +28,7 @@ public class TmiModifyProAction implements Action {
 		// 게시물 수정 권한 판별을 위해 전달받은 파라미터 중 닉네임 비교
 		// => TmiModifyProService의 isTmiWriter() 메서드를 호출
 		//	  파라미터 : 글번호, 닉네임		리턴타입 : boolean(isTmiWriter)
+
 		TmiModifyProService service = new TmiModifyProService();
 		boolean isTmiWriter = service.isTmiWriter(tmiBoard.getIdx(), tmiBoard.getNickname());
 		

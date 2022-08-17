@@ -29,7 +29,6 @@ public class FAQDeleteService {
 		return deleteSuccess;
 	}
 
-
 	public boolean removeReplyFAQ(int idx) {
 		boolean deleteReplySuccess = false;
 		
@@ -50,6 +49,24 @@ public class FAQDeleteService {
 		JdbcUtil.close(con);
 		
 		return deleteReplySuccess;
+	}
+
+
+
+	public boolean checkReply(int idx) {
+		boolean checkReply = false;
+		
+		Connection con = JdbcUtil.getConnection();
+		
+		FAQReplyDAO dao = FAQReplyDAO.getInstance();
+		
+		dao.setConnection(con);
+		
+		checkReply = dao.selectFAQReply(idx);
+		
+		JdbcUtil.close(con);
+		
+		return checkReply;
 	}
 
 

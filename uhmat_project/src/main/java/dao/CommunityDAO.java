@@ -1,12 +1,24 @@
 package dao;
 
+
+import static db.JdbcUtil.*;
+
+
+import java.sql.*;
+
+import vo.*;
+import static db.JdbcUtil.*;
+
 import static db.JdbcUtil.close;
+
+
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+
 
 import com.mysql.cj.protocol.Resultset;
 
@@ -17,6 +29,7 @@ import vo.MateReplyDTO;
 import vo.TmiReplyDTO;
 
 /*
+
  * 
  * 1. 메이트
  * 2. tmi
@@ -240,6 +253,7 @@ public class CommunityDAO {
 	// 1개 게시물의 상세 정보 조회 작업 수행하는 getMate() 메서드
 	public MateDTO getMate(int idx) {
 
+
 		MateDTO mate = null;
 
 		PreparedStatement pstmt = null;
@@ -261,6 +275,7 @@ public class CommunityDAO {
 				mate.setReadcount(rs.getInt("readcount"));
 				mate.setDatetime(rs.getTimestamp("datetime"));
 				System.out.println(mate);
+
 			}
 		} catch (SQLException e) {
 			System.out.println("SQL 구문 오류 - getMate() : " + e.getMessage());
@@ -542,6 +557,7 @@ public class CommunityDAO {
 	// ==============================================================================
 	
 
+
 	// tmi게시판 전체 게시물 수를 조회할 selcetTmiListCount() 메서드 정의
 	// => 파라미터 : 없음, 리턴타입 : int(tmilistCount)
 	public int selectTmiListCount() {
@@ -561,8 +577,10 @@ public class CommunityDAO {
 
 			}
 		} catch (SQLException e) {
+
 			e.printStackTrace();
 			System.out.println("SQL 구문 오류 발생! - selectTmiListCount() " + e.getMessage());
+
 		} finally {
 			close(rs);
 			close(pstmt);
@@ -609,8 +627,10 @@ public class CommunityDAO {
 			}
 
 		} catch (SQLException e) {
+
 			e.printStackTrace();
 			System.out.println("SQL구문 오류 발생! - selectTmiBoardList" + e.getMessage());
+
 		} finally {
 			close(rs);
 			close(pstmt);
@@ -654,8 +674,10 @@ public class CommunityDAO {
 			tmiInsertCount = pstmt.executeUpdate();
 
 		} catch (SQLException e) {
+
 			e.printStackTrace();
 			System.out.println("SQL 구문 작성 오류! - insertTmiBoard() " + e.getMessage());
+
 		} finally {
 			close(rs);
 			close(pstmt);
@@ -725,7 +747,9 @@ public class CommunityDAO {
 
 	// 글 수정, 삭제 권한 판별을 수행하는 isTmiWriter() 메서드 정의
 	public boolean isTmiWriter(int idx, String nickname) {
+
 		System.out.println("CommunityDAO - isTmiWriter() 호출!");
+
 		boolean isTmiWriter = false;
 
 		PreparedStatement pstmt = null;
@@ -745,8 +769,10 @@ public class CommunityDAO {
 			}
 
 		} catch (SQLException e) {
+
 			e.printStackTrace();
 			System.out.println("SQL 구문 오류 발생! - isTmiWriter()" + e.getMessage());
+
 		} finally {
 			close(pstmt);
 			close(rs);
@@ -757,7 +783,9 @@ public class CommunityDAO {
 
 	// 글 수정 작업을 수행하는 updateTmiBoard() 메서드 정의
 	public int updateTmiBoard(CommunityTmiDTO tmiBoard) {
+
 		System.out.println("CommunityDAO - updateTmiBoard() 호출!");
+
 		int updateTmiCount = 0;
 
 		PreparedStatement pstmt = null;
@@ -774,14 +802,17 @@ public class CommunityDAO {
 			System.out.println(updateTmiCount);
 
 		} catch (SQLException e) {
+
 			e.printStackTrace();
 			System.out.println("SQL 구문 오류 발생! - updateTmiBoard()" + e.getMessage());
+
 		} finally {
 			close(pstmt);
 		}
 
 		return updateTmiCount;
 	}
+
 
 	// 게시글 삭제 메서드 정의
 	public int deleteTmiBoard(int idx) {
@@ -1072,5 +1103,6 @@ public class CommunityDAO {
 	
 
 	// -----------------------------------------------------------------------------------------
+
 
 }
