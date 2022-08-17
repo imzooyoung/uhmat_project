@@ -41,7 +41,7 @@ public class TmiRereplyWriteProAction implements Action {
 			out.println("</script>");
 		} else {
 			forward = new ActionForward();
-			forward.setPath("TmiDetail.co?idx=" + idx + "&board_idx=" + Integer.parseInt(request.getParameter("board_idx")) + "&pageNum=" + request.getParameter("pageNum"));
+			forward.setPath("TmiDetail.co?idx="+ Integer.parseInt(request.getParameter("board_idx")) + "&pageNum=" + request.getParameter("pageNum"));
 			forward.setRedirect(true);
 		}
 		

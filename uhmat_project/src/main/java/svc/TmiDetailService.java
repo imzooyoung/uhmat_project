@@ -110,26 +110,5 @@ public class TmiDetailService {
 		return tmiReply;
 	}
 
-	// 답글 리스트
-	public ArrayList<TmiReplyDTO> getTmiRereplyList(int idx) {
-		System.out.println("TmiDetailService - getTmiRereplyList");
-		
-		// 1. Connection 객체 가져오기 - 공통
-		Connection con = getConnection();
-		
-		// 2. CommunityDAO 객체 가져오기 - 공통
-		CommunityDAO dao = CommunityDAO.getInstance();
-		
-		// 3. CommunityDAO 객체에 Connection 객체 전달
-		dao.setConnection(con);
-		
-		ArrayList<TmiReplyDTO> tmiRereplyList = dao.selectTmiReplyList(idx);
-		
-		close(con);
-		
-		
-		return tmiRereplyList;
-	}
-
 	
 }

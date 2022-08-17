@@ -1055,7 +1055,7 @@ public class CommunityDAO {
 			pstmt3.setInt(2, tmiRereply.getBoard_idx());
 			pstmt3.setString(3, tmiRereply.getNickname());
 			pstmt3.setString(4, tmiRereply.getContent());
-			pstmt3.setInt(5, tmiRereply.getIdx());
+			pstmt3.setInt(5, tmiRereply.getBoard_idx());
 			pstmt3.setInt(6, tmiRereply.getRe_lev() + 1);
 			pstmt3.setInt(7, tmiRereply.getRe_seq() + 1);
 			
