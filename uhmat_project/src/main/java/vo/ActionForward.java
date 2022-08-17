@@ -1,5 +1,6 @@
 package vo;
 
+
 public class ActionForward {
 	private String path;
 	private boolean isRedirect;
@@ -15,6 +16,7 @@ public class ActionForward {
 	public void setRedirect(boolean isRedirect) {
 		this.isRedirect = isRedirect;
 	}
+
 	
 	
 	
