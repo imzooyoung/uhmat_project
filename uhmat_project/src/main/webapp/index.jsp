@@ -17,20 +17,11 @@
   </style>
 </head>
 <body>
-
-
-<div>
-<iframe name="iframe1" id="iframe1" src="MemberNaverForm.me"  frameborder="0" cellspacing="0"></iframe>
-<iframe name="iframe1" id="iframe1" src="MemberKakaoForm.me"  frameborder="0" cellspacing="0"></iframe>
-<iframe name="iframe1" id="iframe1" src="MemberGoogleForm.me"  frameborder="0" cellspacing="0"></iframe>
-</div>
-
-<div>
-<iframe name="iframe1" id="iframe1" src="MemberNaverForm.me"  frameborder="0" cellspacing="0"></iframe>
-<iframe name="iframe1" id="iframe1" src="MemberKakaoForm.me"  frameborder="0" cellspacing="0"></iframe>
-<iframe name="iframe1" id="iframe1" src="MemberGoogleForm.me"  frameborder="0" cellspacing="0"></iframe>
-</div>
-
+	<!-- 헤더 들어가는 곳 -->
+	<div>
+		<jsp:include page="inc/header.jsp"></jsp:include>
+	</div>
+	<!-- 헤더 들어가는 곳 -->
 
 <c:choose>
 			<c:when test="${empty sessionScope.sEmail}">

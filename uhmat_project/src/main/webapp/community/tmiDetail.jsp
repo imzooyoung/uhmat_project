@@ -103,36 +103,10 @@
 		<input type="button" value="목록" onclick="location.href='TmiList.co?pageNum=${param.pageNum}'">
 	</section>
 	<hr>
-<!-- 	<i class="material-icons" style="font-size:48px;color:red">subdirectory_arrow_right</i> -->
-	<!-- 댓글 리스트 -->
-		<table border="1">
-<%-- 		<c:when test="${not empty tmiReplyList}"> --%>
-      		<c:forEach var="tmiReply" items="${tmiReplyList }">
-        	 <tr>
-	        	
-				<td>
-					<c:forEach begin="1" end="${tmiReply.re_lev }">
-	     			<i class="material-icons" style="font-size:48px;color:red">subdirectory_arrow_right</i>
-	     			</c:forEach>닉네임 : ${tmiReply.nickname } 
-	     		</td>
-				<td> ${tmiReply.content }</td> 
-				<td>${tmiReply.date }</td>
-				<td><input type="button" value="수정" onclick="location.href='TmiReplyModifyForm.co?idx=${tmiReply.idx}&pageNum=${param.pageNum }'"></td>
-				<td><input type="button" value="삭제" onclick="location.href='TmiReplyDeleteForm.co?idx=${tmiReply.idx}&board_idx=${tmiReply.board_idx }&nickname=${tmiReply.nickname }&pageNum=${param.pageNum }'"></td>
-				<td>
-				<input type="button" value="답글" onclick="location.href='TmiRereplyWriteForm.co?idx=${tmiReply.idx }&board_idx=${tmiReply.board_idx }&pageNum=${param.pageNum}'">
-				</td>
-			</tr>
-			<div id="resultArea"></div>
-     		</c:forEach>
-
-      </table>
-	<br>
-	
 	<!-- 댓글 작성 -->
-	<section id="replyArea">
+	<section>
 		<!-- insertForm 섹션(댓글 작성 영역)은 세션 아이디가 존재할 경우에만 출력 -->
-		<section id="insertForm">
+		<section>
 			<form action="TmiReplyWrite.co" style="position: relative; left: 40%; top:50%;">
 				<!-- 댓글 전송 시 현재 게시물 글번호(idx)도 함께 전송 -->
 				<input type="hidden" name="idx" value="${param.idx }">
@@ -145,5 +119,30 @@
 			</form>
 		</section>
 	</section>
+	<!-- 댓글 리스트 -->
+	<section>
+		<table border="1">
+      		<c:forEach var="tmiReply" items="${tmiReplyList }">
+        	 <tr>
+				<td>
+					<c:forEach begin="1" end="${tmiReply.re_lev }">
+	     				<i class="material-icons" style="font-size:20px;color:red">subdirectory_arrow_right</i>
+	     			</c:forEach>
+	     			닉네임 : ${tmiReply.nickname } 
+	     		</td>
+				<td width="500"> ${tmiReply.content } </td> 
+				<td> ${tmiReply.date } </td>
+				<td>
+				<input type="button" value="답글" onclick="location.href='TmiRereplyWriteForm.co?idx=${tmiReply.idx }&board_idx=${tmiReply.board_idx }&pageNum=${param.pageNum}'">
+				</td>
+				<td><input type="button" value="댓글수정" onclick="location.href='TmiReplyModifyForm.co?idx=${tmiReply.idx }&pageNum=${param.pageNum }'"></td>
+				<td><input type="button" value="댓글삭제" onclick="location.href='TmiReplyDeleteForm.co?idx=${tmiReply.idx }&board_idx=${tmiReply.board_idx }&nickname=${tmiReply.nickname }&pageNum=${param.pageNum }'"></td>
+			</tr>
+     		</c:forEach>
+      </table>
+	</section>
+	<br>
+	
+	
 </body>
 </html>
