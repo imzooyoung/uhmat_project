@@ -1,20 +1,116 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
-<head> 
+<head>
 <meta charset="UTF-8">
-<title>Insert title here</title> 
- <script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
-  <script type="text/javascript" src="../js/jquery-3.6.0.js"></script>
-  <style type="text/css">
-  iframe {
-  border: 1px solid;
-  width: 150px; 
-  height:70px;
-  }
-  </style>
+<title>Insert title here</title>
+<script type="text/javascript"
+	src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js"
+	charset="utf-8"></script>
+<script type="text/javascript" src="./js/jquery-3.6.0.js"></script>
+<style type="text/css">
+
+
+.flex-container {
+	display: flex;
+}
+
+.flex-container>div {
+	background-color: #f1f1f1;
+	height:100%;
+	width: 50%;
+	padding: 20px;
+	font-size: 30px;
+	text-align: center;
+	border: 1px solid;
+	border-radius: 25px;
+}
+
+.login-container{
+	background-color: #f1f1f1;
+	height:700px;
+	
+	width:100%;
+	font-size: 30px;
+
+}
+.buttonResult{
+	background-color: #f2f2f2;
+	width:100%;
+	height:550px;
+	padding: 20px;
+	text-align: center;
+	border: 1px solid;
+
+}
+.buttonResult2{
+	background-color: #f2f2f2;
+	width:100%;
+	height:550px;
+	padding: 20px;
+	text-align: center;
+	border: 1px solid;
+
+}
+#iframe1{
+
+width: 350px;
+height: 75px;
+}
+#iframe2{
+height: 500px;
+
+}
+</style>
+<script type="text/javascript">
+$(function(){
+	var div1 = document.getElementById('login');
+	var div2 = document.getElementById('slmpl');
+	$("#log").text("로그인");
+	$("#slmpleLog").text("간편로그인");
+	  div2.style.display = 'none';
+	  div1.style.display = 'block';
+	$("#log").click(function(){
+		  div2.style.display = 'none';
+		  div1.style.display = 'block';
+		  // btn1 숨기기 (display: none)
+		  if(div2.style.display !== 'none') {
+			  div2.style.display = 'none';
+		  }
+		  // btn` 보이기 (display: block)
+		  else {
+			  div1.style.display = 'block';
+		  }
+		  
+		
+		
+	});
+	$("#slmpleLog").click(function(){
+		  div1.style.display = 'none';
+		  div2.style.display = 'block';
+		  // btn1 숨기기 (display: none)
+		  if(div1.style.display !== 'none') {
+			  div1.style.display = 'none';
+		  }
+		  // btn` 보이기 (display: block)
+		  else {
+			  div2.style.display = 'block';
+		  }
+		  
+		
+		
+	});
+		  // 토글 할 버튼 선택 (btn1)
+		 
+		 
+	
+	
+	
+});
+
+</script>
 </head>
 <body>
 	<!-- 헤더 들어가는 곳 -->
@@ -57,4 +153,4 @@
 
 
 </body>
-</html>   
+</html>

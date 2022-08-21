@@ -194,6 +194,10 @@ public class ReviewCategoryDAO {
 		
 		return updateCount;
 	}
+	public int deleteReview(int idx) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 
 
 	

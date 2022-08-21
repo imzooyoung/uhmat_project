@@ -269,7 +269,7 @@ public class CommunityDAO {
 				mate.setSubject(rs.getString("subject"));
 				mate.setContent(rs.getString("content"));
 				mate.setReadcount(rs.getInt("readcount"));
-				mate.setDatetime(rs.getTimestamp("datetime"));
+				mate.setDate(rs.getTimestamp("datetime"));
 				System.out.println(mate);
 
 			}
@@ -668,15 +668,15 @@ public class CommunityDAO {
 
 			close(pstmt);
 
-			sql = "INSERT INTO community_tmi VALUES(?,?,?,?,?,?)";
+			sql = "INSERT INTO community_tmi VALUES(?,?,?,?,?,?,?)";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, num);
 			pstmt.setString(2, tmiBoard.getNickname());
 			pstmt.setString(3, tmiBoard.getSubject());
 			pstmt.setString(4, tmiBoard.getContent());
 			pstmt.setInt(5, tmiBoard.getReadcount());
-			pstmt.setTimestamp(6, tmiBoard.getDatetime());
-
+			pstmt.setTimestamp(6, tmiBoard.getDate());
+			pstmt.setString(7, "N");
 			tmiInsertCount = pstmt.executeUpdate();
 
 		} catch (SQLException e) {
@@ -713,7 +713,7 @@ public class CommunityDAO {
 				tmiBoard.setNickname(rs.getString("nickname"));
 				tmiBoard.setSubject(rs.getString("subject"));
 				tmiBoard.setContent(rs.getString("content"));
-				tmiBoard.setDatetime(rs.getTimestamp("datetime"));
+				tmiBoard.setDate(rs.getTimestamp("datetime"));
 				tmiBoard.setReadcount(rs.getInt("readcount"));
 				System.out.println(tmiBoard);
 			}
