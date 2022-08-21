@@ -40,7 +40,7 @@
 </head>
 <body>
 	<!-- 게시판 글 수정 -->
-	<section id="modifyForm">
+	<section>
 		<h1>recipe_modifyForm</h1>
 		<form action="RecipeModifyPro.co" name="recipeForm" method="post" enctype="multipart/form-data">
 			<!-- 게시물 수정에 필요한 글번호와 페이징 처리에 필요한 페이지번호도 함께 전달 -->
@@ -62,32 +62,25 @@
 					<td><textarea rows="15" cols="40" id="content" name="content" required="required"> ${recipe.content }</textarea></td>
 				</tr>
 				<tr>
-					<td class="td_left"><label for="fileName">이전파일 : ${recipe. }</label>
-					
-					</td>
-	
-					<td class="td_right">${recipe.real_file1 }(수정불가)</td>
+<!-- 					파일 첨부 형식은 input 태그의 type="file" 속성 사용 -->
+					<td><input type="file" name="file1" multiple="multiple" required="required" /></td>
 				</tr>
-<!-- 				<tr> -->
-<!-- 					<td class="td_left"><label for="original_file2">파일</label></td> -->
-<!-- 					파일 수정 기능은 제외(파일명만 표시) -->
-<%-- 					<td class="td_right">${recipe.original_file2 }(수정불가)</td> --%>
-<!-- 				</tr> -->
-<!-- 				<tr> -->
-<!-- 					<td class="td_left"><label for="original_file3">파일</label></td> -->
-<!-- 					파일 수정 기능은 제외(파일명만 표시) -->
-<%-- 					<td class="td_right">${recipe.original_file3 }(수정불가)</td> --%>
-<!-- 				</tr> -->
-<!-- 				<tr> -->
-<!-- 					<td class="td_left"><label for="original_file4">파일</label></td> -->
-<!-- 					파일 수정 기능은 제외(파일명만 표시) -->
-<%-- 					<td class="td_right">${recipe.original_file4 }(수정불가)</td> --%>
-<!-- 				</tr> -->
-<!-- 				<tr> -->
-<!-- 					<td class="td_left"><label for="original_file5">파일</label></td> -->
-<!-- 					파일 수정 기능은 제외(파일명만 표시) -->
-<%-- 					<td class="td_right">${recipe.original_file5 }(수정불가)</td> --%>
-<!-- 				</tr> -->
+				<tr>
+<!-- 					파일 첨부 형식은 input 태그의 type="file" 속성 사용 -->
+					<td><input type="file" name="file2" multiple="multiple" ></td>
+				</tr>
+				<tr>
+<!-- 					파일 첨부 형식은 input 태그의 type="file" 속성 사용 -->
+					<td><input type="file" name="file3" multiple="multiple" ></td>
+				</tr>
+				<tr>
+<!-- 					파일 첨부 형식은 input 태그의 type="file" 속성 사용 -->
+					<td><input type="file" name="file4" multiple="multiple" ></td>
+				</tr>
+				<tr>
+<!-- 					파일 첨부 형식은 input 태그의 type="file" 속성 사용 -->
+					<td><input type="file" name="file5" multiple="multiple" ></td>
+				</tr>
 			</table>
 			<section>
 				<input type="submit" value="수정">&nbsp;&nbsp;

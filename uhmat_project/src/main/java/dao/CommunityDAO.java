@@ -1336,7 +1336,7 @@ public class CommunityDAO {
 			pstmt.setString(1, recipe.getSubject());
 			pstmt.setString(2, recipe.getContent());
 			pstmt.setInt(3, recipe.getIdx());
-
+			
 			updateCount = pstmt.executeUpdate();
 			System.out.println(updateCount);
 
