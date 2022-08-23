@@ -18,8 +18,8 @@
 		<c:when test="${not empty tmiBoardList and tmiPageInfo.listCount gt 0 }">
 				<c:forEach var="tmi" items="${tmiBoardList }">
 					<tr>
-						<td width="800" height="50"><a href="TmiDetail.co?idx=${tmi.idx }&pageNum=${pageInfo.pageNum}">${tmi.subject }</a> <br> 
-							${tmi.nickname } | ${tmi.readcount } | ${tmi.datetime }</td>
+						<td width="800" height="50"><a href="TmiDetail.co?idx=${tmi.idx }&pageNum=${tmiPageInfo.pageNum}">${tmi.subject }</a> <br> 
+							${tmi.nickname } | ${tmi.readcount } | ${tmi.date }</td>
 					</tr>
 					
 				</c:forEach>

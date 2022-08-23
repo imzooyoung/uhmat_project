@@ -37,7 +37,7 @@ $(function() {
 		$.ajax({
 			url : "http://localhost:8080/uhmat_project/MemberDetailList.me",  // ./ 현재경로표시
 			type : "get",
-			data :  {email:"asw4265@gmail.com"}, // 이 값을 가지고 servlet으로 간다.
+			data :  {email:"admin@naver.com"}, // 이 값을 가지고 servlet으로 간다.
 			dataType: "json",
 			success : function(data) {
 // 				alert("success");

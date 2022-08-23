@@ -1,10 +1,7 @@
 /action/
-/RecipeDetailAction.class
-/RecipeListAction.class
-/RecipeModifyFormAction.class
-/RecipeModifyProAction.class
-/RecipeWriteProAction.class
 /controller/
 /dao/
+/db/
+/mail/
 /svc/
 /vo/
