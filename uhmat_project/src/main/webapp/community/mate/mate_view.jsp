@@ -10,9 +10,9 @@
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
-	<h1>mate_view.jsp</h1>
-	<!-- 	<h1>깃 놈,, 당장 커밋해라</h1>	 -->
-	
+	<!-- 헤더 들어가는 곳 -->
+		<jsp:include page="../../inc/header.jsp"/>
+	<!-- 헤더 들어가는 곳 -->
 	<section>
 		<table>
 			<tr>
@@ -60,7 +60,9 @@
 	</section>
 	
 	
-	
+	<!-- 		푸터 들어가는 곳 -->
+	<jsp:include page="../../inc/footer.jsp"/>
+	<!-- 		푸터 들어가는 곳 -->
 	
 	
 	

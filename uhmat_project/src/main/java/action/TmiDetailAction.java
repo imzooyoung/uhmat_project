@@ -52,7 +52,7 @@ public class TmiDetailAction implements Action {
 		// ActionForward 객체를 활용하여 community 디렉토리의 tmiDetail.jsp 페이지 포워딩 설정
 		// => Dispatcher 방식
 		forward = new ActionForward();
-		forward.setPath("community/tmiDetail.jsp");
+		forward.setPath("community/tmi/tmiDetail.jsp");
 		forward.setRedirect(false);
 		
 		return forward;

@@ -17,6 +17,8 @@ import action.MateDetailAction;
 import action.MateListAction;
 import action.MateModifyFromAction;
 import action.MateModifyProAction;
+import action.MateReplyDeleteAction;
+import action.MateReplyModifyAction;
 import action.MateReplyWriteAction;
 import action.MateRereplyFormAction;
 import action.MateRereplyWriteAction;
@@ -78,8 +80,8 @@ public class CommunityFrontController extends HttpServlet {
 		ActionForward forward = null;
 		
 
+		// ----------------------------------------------------------------------------
 		// 추출된 서블릿 주소를 if문을 사용하여 판별하고 각 주소에 따른 액션(작업) 요청
-		// 글쓰기 폼을 요청하는 서블릿(/MateWriteForm.co) 요청
 		// 리스트를 요청하는 서블릿(/MateListForm.co) 요청
 		if(command.equals("/MateList.co")) {
 			action = new MateListAction();
@@ -92,7 +94,6 @@ public class CommunityFrontController extends HttpServlet {
 				e.printStackTrace();
 			}
 			
-
 		// -----------------------------------------------------------------	
 		// 글쓰기 폼을 요청하는 서블릿(/MateWriteForm.co) 요청
 		} else if(command.equals("/MateWriteForm.co")) {
@@ -112,17 +113,7 @@ public class CommunityFrontController extends HttpServlet {
 
 				e.printStackTrace();
 
-						}
-		} else if(command.equals("/MateWritePro.co")) {
-			action = new MateWriteProAction();
-			try {
-
-				forward = action.execute(request, response);
-			} catch (Exception e) {
-				System.out.println("TmiWriteProAction 오류 - " + e.getMessage());
-				e.printStackTrace();
-
-						}
+			}
 		// ------------------------------------------------------------------
 		// 글 디테일 뷰를 요청하는 서블릿(/MateDetail.co) 요청
 		} else if(command.equals("/MateDetail.co")) {
@@ -186,23 +177,49 @@ public class CommunityFrontController extends HttpServlet {
 			} catch (Exception e) {
 				System.out.println("MateReplyProAction 오류 - " + e.getMessage());
 				e.printStackTrace();
-			} 
-		}	else if(command.equals("/MateDeleteForm.co")) {
-				forward = new ActionForward();
-				forward.setPath("community/mate/mate_delete.jsp");
-				forward.setRedirect(false);
-				
-		} else if(command.equals("/MateDeletePro.co")) {
-			action = new MateDeleteProAction();
+			}
+		// ------------------------------------------------------
+		// 댓글 리스트
+		} else if(command.equals("/MateReplyList.co")) {
+			action = new MateDetailAction();
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {
-				System.out.println("MateDeleteProAction 오류 - " + e.getMessage());
+				System.out.println(" MateDetailAction - reply 오류 - " + e.getMessage());
+				e.printStackTrace();
+			}	
+		// ---------------------------------------------------------------	
+		// 댓글 수정	
+		} else if(command.equals("/MateReplyModifyForm.co")) {
+			forward = new ActionForward();
+			forward.setPath("community/mate/mate_replyModify.jsp");
+			forward.setRedirect(false);
+			
+		} else if(command.equals("/MateReplyModifyPro.co")) {
+			action = new MateReplyModifyAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		
-			// ----------------------------------------------------------------------
-			// 대댓글 글쓰기
+			
+		// --------------------------------------------------------------------
+		// 댓글 삭제
+		} else if(command.equals("/MateReplyDeleteForm.co")) {
+			forward = new ActionForward();
+			forward.setPath("community/mate/mate_replyDelete.jsp");
+			forward.setRedirect(false);
+		} else if(command.equals("/MateReplyDeletePro.co")) {
+			action = new MateReplyDeleteAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				System.out.println(" MateReplyDeleteAction - reply 오류 - " + e.getMessage());
+				e.printStackTrace();
+			}
+		// ----------------------------------------------------------------------
+		// 대댓글 글쓰기
 		} else if(command.equals("/MateRereplyForm.co")) {
 //				forward = new ActionForward();
 //				forward.setPath("community/mate/mate_RereplyForm.jsp");
@@ -241,7 +258,7 @@ public class CommunityFrontController extends HttpServlet {
 			System.out.println("---------------------------------------------");
 			System.out.println("게시물 작성 작업");
 			forward = new ActionForward();
-			forward.setPath("community/tmiWrite.jsp");
+			forward.setPath("community/tmi/tmiWrite.jsp");
 			forward.setRedirect(false);
 			
 		} else if(command.equals("/TmiWritePro.co")) {
@@ -292,11 +309,11 @@ public class CommunityFrontController extends HttpServlet {
 		} else if(command.equals("/TmiDeleteForm.co")) {
 			System.out.println("게시물 삭제 조회");
 			forward = new ActionForward();
-			forward.setPath("community/tmiDelete.jsp");
+			forward.setPath("community/tmi/tmiDelete.jsp");
 			forward.setRedirect(false);
 			
 		}  else if(command.equals("/TmiDeletePro.co")) {
-			System.out.println("댓글 삭제 요청");
+			System.out.println("게시물 삭제 요청");
 			try {
 				action = new TmiDeleteProAction();
 				forward = action.execute(request, response);
@@ -347,7 +364,7 @@ public class CommunityFrontController extends HttpServlet {
 		} else if(command.equals("/TmiReplyDeleteForm.co")) {
 			System.out.println("댓글 삭제 작업");
 			forward = new ActionForward();
-			forward.setPath("/community/tmiReplyDelete.jsp");
+			forward.setPath("/community/tmi/tmiReplyDelete.jsp");
 			forward.setRedirect(false);
 		} else if(command.equals("/TmiReplyDeletePro.co")) {
 			System.out.println("댓글 삭제 요청 작업");
@@ -444,12 +461,12 @@ public class CommunityFrontController extends HttpServlet {
 			}
 			
 		} else if(command.equals("/RecipeDeleteForm.co")){
-			System.out.println(request.getParameter("레시피글 삭제 작업"));
+			System.out.println("레시피글 삭제 작업");
 			forward = new ActionForward();
 			forward.setPath("community/recipe/recipe_delete.jsp");
 			forward.setRedirect(false);
 		} else if(command.equals("/RecipeDeletePro.co")) {
-			System.out.println("레시피글 작세 작업 요청");
+			System.out.println("레시피글 삭제 작업 요청");
 			action = new RecipeDeleteAction();
 			try {
 				forward = action.execute(request, response);
@@ -502,6 +519,8 @@ public class CommunityFrontController extends HttpServlet {
 				e.printStackTrace();
 				System.out.println("RecipeReplyModifyAction - reply 오류 - " + e.getMessage());
 			}
+		// --------------------------------------------------------------------
+		// 레시피 댓글 삭제
 		} else if(command.equals("/RecipeReplyDeleteForm.co")) {
 			System.out.println("레시피댓글 삭제 작업");
 			forward = new ActionForward();

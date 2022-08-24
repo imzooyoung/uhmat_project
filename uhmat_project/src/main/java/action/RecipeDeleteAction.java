@@ -41,6 +41,7 @@ public class RecipeDeleteAction implements Action {
 //		String path = "D:\\workspace_jsp1\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\uhmat_project\\recipe_upload";
 		String path = request.getServletContext().getRealPath("./recipe_upload");
 		File folder = new File(path);
+		System.out.println(path);
 		
 //		String filePath = "D:\\workspace_jsp1\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\uhmat_project\\recipe_upload\\" + file1;
 		String filePath = request.getServletContext().getRealPath("./recipe_upload/" + file1);

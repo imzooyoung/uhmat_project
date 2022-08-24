@@ -53,45 +53,6 @@ public class CommunityDAO {
 		this.con = con;
 	}
 
-	// ----------------------------------------------------------------------------------
-
-	// 메이트 댓글
-	public int insertReplyMate(CommentDTO mateComment) {
-
-		int insertCount = 0;
-
-		PreparedStatement pstmt = null, pstmt2 = null;
-		ResultSet rs = null;
-
-		int num = 1;
-
-		// 새 글 번호로 사용될 번호를 생성하기 위해 기존 게시물의 가장 큰 번호 조회
-		// => 조회 결과가 있을 경우 해당 번호 + 1 값을 새 글 번호로 저장
-		try {
-			String sql = "SELECT MAX(idx) FROM community_mate";
-			pstmt = con.prepareStatement(sql);
-			rs = pstmt.executeQuery();
-
-			if (rs.next()) {
-				num = rs.getInt(1); // 조회된 가장 큰 번호 + 1 값을 새 글 번호로 저장
-			}
-
-			// 기존 답글들에 대한 순서번호(re_seq) 증가 작업 처리
-			// => 원본글의 참조글번호(re_ref) 와 같고(같은 레코드들 중에서)
-			// 원본글의 순서번호(re_seq)보다 큰 레코드들의 순서번호를 1씩 증가시키기
-			sql = "UPDATE mate_reply SET re_seq=re_seq+1 WHERE re_ref=? AND re_seq>?";
-			pstmt2 = con.prepareStatement(sql);
-			pstmt2.setInt(1, mateComment.getRe_ref());
-			pstmt2.setInt(2, mateComment.getRe_seq());
-			pstmt2.executeUpdate();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		return insertCount;
-	}
-
 	// -----------------------------------------------------------------------------------------
 
 	// 글 갯수 조회
@@ -355,7 +316,6 @@ public class CommunityDAO {
 		
 		return deleteMateReply;
 	}
-	
 
 	// Mate 댓글 작성
 	public int insertReplyMate(MateReplyDTO mateReply) {
@@ -611,9 +571,7 @@ public class CommunityDAO {
 		
 		return mateReply;
 	}
-	// ==============================================================================
-	
-
+	// =============================================================================
 
 	// tmi게시판 전체 게시물 수를 조회하고 검색 기능을 수행할 selcetTmiListCount() 메서드 정의
 	// 전체 tmi 게시물 수 조회를 수행 메서드 정의
@@ -729,7 +687,7 @@ public class CommunityDAO {
 
 			close(pstmt);
 
-			sql = "INSERT INTO community_tmi VALUES(?,?,?,?,?,?,?)";
+			sql = "INSERT INTO community_tmi VALUES(?,?,?,?,?,?)";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, num);
 			pstmt.setString(2, tmiBoard.getNickname());
@@ -737,7 +695,6 @@ public class CommunityDAO {
 			pstmt.setString(4, tmiBoard.getContent());
 			pstmt.setInt(5, tmiBoard.getReadcount());
 			pstmt.setTimestamp(6, tmiBoard.getDate());
-			pstmt.setString(7, "N");
 			tmiInsertCount = pstmt.executeUpdate();
 
 		} catch (SQLException e) {
@@ -882,18 +839,18 @@ public class CommunityDAO {
 
 
 	// 게시글 삭제 메서드 정의
-	public int deleteTmiBoard(int idx) {
+	public int deleteTmi(int idx) {
 		System.out.println("CommunityDAO - deleteTmiBoard() 호출!");
 		int deleteTmiCount = 0;
 
 		PreparedStatement pstmt = null;
 
 		try {
-			String sql = "DELETE FROM tmi_reply WHERE board_idx=?";
+			String sql = "DELETE FROM community_tmi WHERE idx=?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, idx);
-
 			deleteTmiCount = pstmt.executeUpdate();
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 			System.out.println("SQL 구문 오류 - deleteTmiBoard() : " + e.getMessage());
@@ -901,6 +858,26 @@ public class CommunityDAO {
 
 		return deleteTmiCount;
 	}
+	
+	public int deleteTmiBoard(int idx) {
+		int deleteTmiReply = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		try {
+			String sql = "DELETE FROM tmi_reply WHERE board_idx=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, idx);
+			deleteTmiReply = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println("sql구문 오류 - deleteMateReply" + e.getMessage());
+		}
+		
+		return deleteTmiReply;
+	}
+	
 	
 	// -----------------------------------------------------------------------------------------
 	// TMI 댓글 메서드 시작
@@ -1530,7 +1507,7 @@ public class CommunityDAO {
                
                recipeReplyList.add(recipeReply);
             }
-            System.out.println("mateReplyList :" + recipeReplyList );
+            System.out.println("recipeReplyList :" + recipeReplyList );
             
          } catch (SQLException e) {
             System.out.println("SQL 구문 오류 - selectRecipeReply() : " + e.getMessage());
@@ -1768,4 +1745,6 @@ public class CommunityDAO {
 		
 		return recipeSearchList;
 	}
+
+
 }
