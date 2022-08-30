@@ -167,12 +167,13 @@ public class CommunityDAO {
 			close(pstmt);
 
 			// 전달받은 데이터를 board 테이블에 INSERT
-			sql = "INSERT INTO community_mate VALUES(?,?,?,?,0,CURRENT_TIMESTAMP)";
+			sql = "INSERT INTO community_mate VALUES(?,?,?,?,0,now(),?)";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, num);
 			pstmt.setString(2, mate.getNickname());
 			pstmt.setString(3, mate.getSubject());
 			pstmt.setString(4, mate.getContent());
+			pstmt.setString(5, "N");
 
 			insertCount = pstmt.executeUpdate();
 		} catch (SQLException e) {
@@ -231,6 +232,7 @@ public class CommunityDAO {
 				mate.setContent(rs.getString("content"));
 				mate.setReadcount(rs.getInt("readcount"));
 				mate.setDate(rs.getTimestamp("datetime"));
+				mate.setReport(rs.getString("report"));
 				System.out.println(mate);
 
 			}
@@ -504,21 +506,22 @@ public class CommunityDAO {
 //			 기존 답글들에 대한 순서번호(re_seq) 증가 작업 처리
 //			 => 원본글의 참조글번호(re_ref) 와 같고(같은 레코드들 중에서)
 //			    원본글의 순서번호(re_seq)보다 큰 레코드들의 순서번호를 1씩 증가시키기
-			sql = "UPDATE mate_reply SET re_seq=re_seq+1 WHERE re_seq>?";
+			sql = "UPDATE mate_reply SET re_seq=re_seq+1 WHERE re_ref=? AND re_seq>?";
 			pstmt2 = con.prepareStatement(sql);
-			pstmt2.setInt(1, mateReply.getRe_seq());
+			pstmt2.setInt(1, mateReply.getRe_ref()); // 참조글번호
+	         pstmt2.setInt(2, mateReply.getRe_seq()); // 순서번호
 			mateRereplyInsertCount = pstmt2.executeUpdate();
 			
 			// 답글을 mate_reply 테이블에 INSERT 작업
-			sql = "INSERT INTO mate_reply VALUES(?,?,?,?,?,?,now(),?)";
-			pstmt3 = con.prepareStatement(sql);
-			pstmt3.setInt(1, num);
-			pstmt3.setString(2, mateReply.getNickname());
-			pstmt3.setString(3, mateReply.getContent());
-			pstmt3.setInt(4, mateReply.getIdx());
-			pstmt3.setInt(5, mateReply.getRe_ref() + 1);
-			pstmt3.setInt(6, mateReply.getRe_seq() + 1);
-			pstmt3.setInt(7, mateReply.getBoard_idx());
+			sql = "INSERT INTO mate_reply VALUES(?,?,?,?,?,?,?,now())";
+			 pstmt3 = con.prepareStatement(sql);
+	         pstmt3.setInt(1, num);
+	         pstmt3.setString(2, mateReply.getNickname());
+	         pstmt3.setInt(3, mateReply.getBoard_idx());
+	         pstmt3.setString(4, mateReply.getContent());
+	         pstmt3.setInt(5, mateReply.getRe_ref());
+	         pstmt3.setInt(6, mateReply.getRe_lev() + 1);
+	         pstmt3.setInt(7, mateReply.getRe_seq() + 1);
 //			System.out.println(mateReply);
 			mateRereplyInsertCount = pstmt3.executeUpdate();
 			
@@ -687,7 +690,7 @@ public class CommunityDAO {
 
 			close(pstmt);
 
-			sql = "INSERT INTO community_tmi VALUES(?,?,?,?,?,?)";
+			sql = "INSERT INTO community_tmi VALUES(?,?,?,?,?,?,?)";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, num);
 			pstmt.setString(2, tmiBoard.getNickname());
@@ -695,6 +698,7 @@ public class CommunityDAO {
 			pstmt.setString(4, tmiBoard.getContent());
 			pstmt.setInt(5, tmiBoard.getReadcount());
 			pstmt.setTimestamp(6, tmiBoard.getDate());
+			pstmt.setString(7, "N");
 			tmiInsertCount = pstmt.executeUpdate();
 
 		} catch (SQLException e) {
@@ -733,6 +737,7 @@ public class CommunityDAO {
 				tmiBoard.setContent(rs.getString("content"));
 				tmiBoard.setDate(rs.getTimestamp("datetime"));
 				tmiBoard.setReadcount(rs.getInt("readcount"));
+				tmiBoard.setReport(rs.getString("report"));
 				System.out.println(tmiBoard);
 			}
 		} catch (SQLException e) {
@@ -1114,9 +1119,10 @@ public class CommunityDAO {
 			if(rs.next()) {
 				idx = rs.getInt(1) + 1;
 			}
-			sql = "UPDATE tmi_reply SET re_seq=re_seq+1 WHERE re_seq>?";
+			sql = "UPDATE tmi_reply SET re_seq=re_seq+1 WHERE re_ref=? AND re_seq>?";
 			pstmt2 = con.prepareStatement(sql);
-			pstmt2.setInt(1, tmiRereply.getRe_seq());
+			pstmt2.setInt(1, tmiRereply.getRe_ref()); // 참조글번호
+	         pstmt2.setInt(2, tmiRereply.getRe_seq()); // 순서번호
 			
 			tmiRereplyInsertCount = pstmt2.executeUpdate();
 			
@@ -1173,7 +1179,7 @@ public class CommunityDAO {
 			close(pstmt);
 			
 			// 전달받은 데이터를 community_recipe 테이블에 INSERT
-			sql = "INSERT INTO community_recipe VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,now())";
+			sql = "INSERT INTO community_recipe VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,now(),?)";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, num);
 			pstmt.setString(2, recipe.getNickname());
@@ -1190,6 +1196,7 @@ public class CommunityDAO {
 			pstmt.setString(13, recipe.getReal_File4());
 			pstmt.setString(14, recipe.getOriginal_File5());
 			pstmt.setString(15, recipe.getReal_File5());
+			pstmt.setString(16, recipe.getReport());
 			
 			insertCount = pstmt.executeUpdate();
 					
@@ -1274,6 +1281,7 @@ public class CommunityDAO {
 				recipe.setReal_File4(rs.getString("real_File4"));
 				recipe.setReal_File5(rs.getString("real_File5"));
 				recipe.setSubject(rs.getString("subject"));
+				recipe.setReport(rs.getString("report"));
 				System.out.println(recipe);
 				
 				// 전체 게시물 정보를 저장하는 ArrayList 객체에 1개 게시물 정보 MateDTO 객체 추가
@@ -1345,6 +1353,7 @@ public class CommunityDAO {
 				recipe.setReal_File4(rs.getString("real_File4"));
 				recipe.setReal_File5(rs.getString("real_File5"));
 				recipe.setSubject(rs.getString("subject"));
+				recipe.setReport(rs.getString("report"));
 				System.out.println(recipe);
 				
 			}

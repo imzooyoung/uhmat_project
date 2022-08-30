@@ -1,9 +1,6 @@
 package controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,29 +8,24 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.json.simple.JSONObject;
-
 import com.google.gson.Gson;
 
 import action.Action;
+import action.FAQDetailAction;
+import action.MateDetailAction;
+import action.NoticeDetailAction;
+import action.RecipeDetailAction;
+import action.TmiDetailAction;
+import action.admin.AdminDeleteMemberAction;
+import action.admin.AdminManageMemberDetailAction;
+import action.admin.AdminManageMemberListAction;
 import action.admin.AllBoardListAction;
-import action.member.MemberAuthAction;
-import action.member.MemberChechDuplicateEmailAction;
-import action.member.MemberChechDuplicateNickNameAction;
-import action.member.MemberDetailFormAction;
-import action.member.MemberDetailListAction;
-import action.member.MemberDetailModifyProAction;
-import action.member.MemberFindPasswordProAction;
-import action.member.MemberGoogleJoinProAction;
-import action.member.MemberJoinProAction;
-import action.member.MemberKakaoJoinProAction;
-import action.member.MemberLoginProAction;
-import action.member.MemberLogoutAction;
-import action.member.MemberPasswordModifyProAction;
-import action.member.MemberSendAuthMailAction;
-import action.member.MemberSendPasswordMailAction;
+import action.admin.adminFAQDetailAction;
+import action.admin.adminMateDetailAction;
+import action.admin.adminNoticeDetailAction;
+import action.admin.adminRecipeDetailAction;
+import action.admin.adminTmiDetailAction;
 import vo.ActionForward;
-import vo.MemberDTO;
 
 /**
  * Servlet implementation class admincontroller
@@ -50,11 +42,45 @@ public class admincontroller extends HttpServlet {
 		System.out.println(command);
 		ActionForward forward = null;
 		Action action = null;
-		// 회원가입 폼
-		if (command.equals("/AllBoardListForm.ad")) {
+		if (command.equals("/Admin.ad")) {
 			forward = new ActionForward();
-			forward.setPath("/admin/AllBoardList.jsp");
+			forward.setPath("admin/adminTop.jsp");
 			forward.setRedirect(false);
+			
+		} else if(command.equals("/AdminManageMemberList.ad")) {
+			try {
+				action = new AdminManageMemberListAction();
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+		} else if(command.equals("/AdminManageMemberDetail.ad")) {
+			try {
+				action = new AdminManageMemberDetailAction();
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		
+		} else if(command.equals("/AdminDeleteMember.ad")) {
+			try {
+				action = new AdminDeleteMemberAction();
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		//-------------------------------------------------------------------
+		// 회원가입 폼
+		else if (command.equals("/AllBoardListForm.ad")) {
+			try {
+				action = new AllBoardListAction();
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		// 회원가입 폼 (DB)처리
 		else if (command.equals("/AllBoardList.ad")) {
@@ -70,7 +96,68 @@ public class admincontroller extends HttpServlet {
 			System.out.println(request.getAttribute("list"));
 			response.setContentType("application/json; charset=utf-8");
 			response.getWriter().write(gson);
+		}else if(command.equals("/MateDetail.ad")) {
+			action = new adminMateDetailAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				System.out.println("MateDetailAction 오류 - " + e.getMessage());
+
+				e.printStackTrace();
+
+			}
+		}else if(command.equals("/TmiDetail.ad")) {
+			System.out.println("---------------------------------------------");
+			System.out.println("게시물 상세 내용 조회");
+			try {
+				action = new adminTmiDetailAction();
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				System.out.println("TmiDetailAction 오류 - " + e.getMessage());
+				e.printStackTrace();
+			}
+			
+		}else if(command.equals("/RecipeDetail.ad")) {
+			action = new adminRecipeDetailAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+				System.out.println("RecipeDetailAction 오류 - " + e.getMessage());
+			}
+		}else if(command.equals("/NoticeDetail.ad")) {
+			try {
+				action = new adminNoticeDetailAction();
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}else if(command.equals("/FAQDetail.ad")) {
+			try {
+				action = new adminFAQDetailAction();
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		
 		if (forward != null) {
 			if (forward.isRedirect()) {

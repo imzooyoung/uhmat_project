@@ -6,7 +6,7 @@
 <head> 
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link href="/uhmat_project/css/header.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath}/css/header.css" rel="stylesheet" type="text/css">
 <script src="https://kit.fontawesome.com/5382a0d7e0.js" crossorigin="anonymous"></script>
 
 <script type="text/javascript">
@@ -21,42 +21,42 @@
 <body>
 <div id="container">
 	<header>
-		<!-- 로고 들어가는 곳 -->
+		<!-- 로고 들어가는 곳 시작 -->
     	<div class="mainLogo">
-    		<a href="main.jsp"><img src="/uhmat_project/image/uhmatMainLogo.jpg"></a>
+    		<a href="/uhmat_project/"><img src="image/uhmatMainLogo.jpg"></a>
     	</div>
-		<!-- 로고 들어가는 곳 -->
+		<!-- 로고 들어가는 곳 끝 -->
 		
-		<!-- 로그인 및 회원가입 부분 -->
+		<!-- 로그인 및 회원가입 부분 시작 -->
 		<div class="loginPart">
 		<c:choose>
-			<c:when test="${empty sessionScope.sEmail}">
-				<a href="MemberLoginForm.me">로그인</a>&nbsp; <a href="MemberJoinForm.me">회원가입</a>
+			<c:when test="${empty sessionScope.sNickName}">
+				<a href="MemberLogin.me">로그인</a> | <a href="MemberJoinForm.me">회원가입</a>
 			</c:when>
 			<c:otherwise>
 				<%-- 하이퍼링크에 자바스크립트 함수 연결 시 href 속성에 아무 경로도 지정하지 않는 방법 --%>
-				<a href="MemberDetailForm.me?email=${sessionScope.sEmail }">${sessionScope.sEmail }
-					님 </a>&nbsp; <a href="MemberLogout.me">로그아웃</a>
+				<a href="MemberDetailForm.me?nickName=${sessionScope.sNickName }">${sessionScope.sNickName }
+					님 </a>  | <a href="MemberLogout.me">로그아웃</a>
 				<%-- 세션 아이디가 "admin" 일 때만 관리자페이지 링크("AdminMain.me") 표시 --%>
-				<c:if test="${sessionScope.sEmail eq 'admin'}"> | <a
+				<c:if test="${sessionScope.sNickName eq 'admin'}"> | <a
 						href="AdminMain.me">관리자페이지</a>
 				</c:if>
 			</c:otherwise>
 		</c:choose>
 		</div>
-		<!-- 로그인 및 회원가입 부분 -->
+		<!-- 로그인 및 회원가입 부분 끝 -->
 		
-	<!-- 탑 메뉴 부분 -->
+	<!-- 탑 메뉴 부분 시작 -->
 	<div class="topMenu">
     <ul>
     	<li>
     	<div class="dropdown">
-    		<a href="CompanyModify.cp">회사소개</a>
+    		<a href="CompanyDetail.cp">회사소개</a>
     			<div class="dropdownContent">
 				<ul>
-					<li><a href="CompanyModify.cp">회사 소개</a></li>
-					<li><a href="UhmatModify.cp">어맛 소개</a></li>
-					<li><a href="DeveloperModify.cp">개발자 소개</a></li>
+					<li><a href="CompanyDetail.cp">회사 소개</a></li>
+					<li><a href="UhmatDetail.cp">어맛 소개</a></li>
+					<li><a href="DeveloperDetail.cp">개발자 소개</a></li>
 					<li><a href="Policy.cp">이용약관</a></li>
 				</ul>	
 				</div>
@@ -125,36 +125,16 @@
 	  		
   	</ul>
     </div>
-   
-	<!-- 탑 메뉴 부분 -->
+    	
 	
 	
-	<!-- 검색 창 부분 -->
-	<div class="searchContainer">
-		<div class="row">
-		<!-- 검색 버튼 눌렀을 때 mainController 로 통해 uhmatSearch 페이지로 가게끔 구현해야함 -->
-			<form method="post" name="search" action="uhmatSearch.jsp">
-				<table class="pullRight">
-					<tr>
-						<td>
-							<i class="fa-solid fa-magnifying-glass" style="font-size: 1.1em"></i>
-							<input type="search" id="searchControl"
-								placeholder="검색할 음식명이나 음식점명" name="searchText" value="" maxlength="100" autocomplete="off">
-						</td>
-						<td>
-							<button id="searchBtn" type="submit" title="검색"
-							    class="submitBtn">
-								<span class="blind">검색</span>
-								<span class="searchIconSubmit"></span>
-							</button>
-						</td>
-					</tr>
-				</table>
-			</form>
-		</div>
-	</div>
-	<!-- 검색 창 부분 -->
-	</header>
+	<!-- 검색 창 부분 끝 -->
+    
+   	</header>
+	<!-- 탑 메뉴 부분 끝 -->
+	
+	
+	
 </div>
 </body>
 </html>   

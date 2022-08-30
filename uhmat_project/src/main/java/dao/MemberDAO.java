@@ -3,7 +3,9 @@ package dao;
 import static db.JdbcUtil.close;
 
 import java.sql.*;
+import java.util.*;
 
+import db.*;
 import vo.*;
 
 public class MemberDAO {
@@ -78,16 +80,16 @@ public class MemberDAO {
 	}
 
 	public int insertMember(MemberDTO dto) {
-		PreparedStatement pstmt = null;
-
 		System.out.println("insertMember");
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
 		int insertCount = 0;
 		String sql = "";
-
+		
 		try {
 			sql = "INSERT INTO member VALUES (?,?,?,?,?,?,?,?,null,?,?)";
 			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, dto.getNickName());
+			pstmt.setString(1, dto.getNickname());
 			pstmt.setString(2, dto.getName());
 			pstmt.setString(3, dto.getEmail());
 			pstmt.setString(4, dto.getPasswd());
@@ -97,7 +99,7 @@ public class MemberDAO {
 			pstmt.setString(8, dto.getAddress2());
 			pstmt.setString(9, dto.getAuth_status());
 			pstmt.setString(10, dto.getApi_id());
-
+			
 			insertCount = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -320,8 +322,43 @@ public class MemberDAO {
 		return updateCount;
 	}
 
-	public MemberDTO selectMember(String email) {
-		System.out.println("selectMember");
+	public MemberDTO selectMember(String nickName) {
+//		System.out.println("selectMember");
+		MemberDTO member = null;
+
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+			String sql = "SELECT * FROM member WHERE nickname=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, nickName);
+			rs = pstmt.executeQuery();
+
+			if (rs.next()) {
+				member = new MemberDTO();
+				member.setName(rs.getString("name"));
+				member.setNickname(rs.getString("nickname"));
+				member.setEmail(rs.getString("email"));
+				member.setBirthdate(rs.getDate("birthdate"));
+				member.setPostCode(rs.getString("postcode"));
+				member.setAddress1(rs.getString("address1"));
+				member.setAddress2(rs.getString("address2"));
+
+//				System.out.println(member);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println("SQL 오류 - selectMember() : " + e.getMessage());
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+
+		return member;
+	}
+	public MemberDTO getNickname(String email) {
+//		System.out.println("selectMember");
 		MemberDTO member = null;
 
 		PreparedStatement pstmt = null;
@@ -335,15 +372,8 @@ public class MemberDAO {
 
 			if (rs.next()) {
 				member = new MemberDTO();
-				member.setName(rs.getString("name"));
-				member.setNickName(rs.getString("nickname"));
-				member.setEmail(rs.getString("email"));
-				member.setBirthdate(rs.getDate("birthdate"));
-				member.setPostCode(rs.getString("postcode"));
-				member.setAddress1(rs.getString("address1"));
-				member.setAddress2(rs.getString("address2"));
+				member.setNickname(rs.getString("nickname"));
 
-				System.out.println(member);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -365,7 +395,7 @@ public class MemberDAO {
 		try {
 			String sql = "UPDATE member SET nickname=?,name=?,birthdate=?, postcode=?,address1=?,address2=? WHERE email=?";
 			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, member.getNickName());
+			pstmt.setString(1, member.getNickname());
 			pstmt.setString(2, member.getName());
 			pstmt.setDate(3, member.getBirthdate());
 			pstmt.setString(4, member.getPostCode());
@@ -383,5 +413,280 @@ public class MemberDAO {
 
 		return updateCount;
 	}
+
+	public ArrayList<MemberDTO> AdminSelectMemberList(int pageNum, int listLimit, String keyword) {
+//		System.out.println("AdminSelectMemberList");
+		ArrayList<MemberDTO> list = null;
+		int listCount =0;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		ResultSet rs2 = null;
+		ResultSet rs3 = null;
+		
+		int startRow = (pageNum- 1) * listLimit;
+		
+		try {
+			String sql = "SELECT * FROM member WHERE name LIKE ? ";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, "%" + keyword + "%"); 
+				
+			rs = pstmt.executeQuery();
+			
+			list = new ArrayList<MemberDTO>();
+			
+			while(rs.next()) {
+				System.out.println("rs.next()");
+				sql = "SELECT (COUNT(m.subject) + COUNT(t.subject) + COUNT(r.subject)) AS NUM FROM member me INNER JOIN community_mate m ON me.nickname = m.nickname  INNER JOIN community_tmi t ON m.nickname = t.nickname  INNER JOIN reviewboard r ON t.nickname = r.nickname WHERE r.nickname = ?";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setString(1, rs.getString("nickname"));
+				rs2 = pstmt.executeQuery();
+				
+				if(rs2.next()) {
+					System.out.println("rs2.next()");
+					listCount = rs2.getInt(1);
+					sql = "SELECT * FROM member WHERE name LIKE ? LIMIT ?,? ";
+					pstmt = con.prepareStatement(sql);
+					pstmt.setString(1, "%" + keyword + "%"); 
+					pstmt.setInt(2, startRow);
+					pstmt.setInt(3, listLimit);
+					rs3 = pstmt.executeQuery();
+					
+					
+					if(rs3.next()) {
+						System.out.println("rs3.next()");
+						MemberDTO member = new MemberDTO();
+						member.setName(rs.getString("name"));
+						member.setNickname(rs.getString("nickname"));
+						member.setEmail(rs.getString("email"));
+						member.setBirthdate(rs.getDate("birthdate"));
+						member.setPostCode(rs.getString("postcode"));
+						member.setAddress1(rs.getString("address1"));
+						member.setAddress2(rs.getString("address2"));
+						
+						System.out.println("member : " + member);
+						
+						list.add(member);
+					}
+				}	
+			}
+//			System.out.println("AdminSelectMemberList의 list :"  + list);
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println("SQL 오류 AdminSelectMemberList() :" + e.getMessage());
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		
+		return list;
+	}
+
+	public int SelectMemberListCount(String keyword) {
+		int listCount = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			String sql = "SELECT COUNT(*) FROM member WHERE name LIKE ?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, "%" + keyword + "%" );
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				listCount = rs.getInt(1);
+			}
+//			System.out.println("listCount : " + listCount);
+			
+		} catch (SQLException e) {
+			System.out.println("SQL 구문 오류 발생! -  " + e.getMessage());
+			e.printStackTrace();
+		} finally {
+			
+			JdbcUtil.close(rs);
+			JdbcUtil.close(pstmt);
+		}
+		return listCount;
+	}
+
+	public int deleteMember(String email) {
+		int deleteCount = 0;
+		PreparedStatement pstmt = null;
+		
+		try {
+			String sql = "DELETE FROM member WHERE email=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, email);
+			
+			deleteCount = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			JdbcUtil.close(pstmt);
+		}
+		
+		return deleteCount;
+	}
+
+	public int selectAnythingListcount(String keyword,String title,String nickName) {
+		
+		int listCount = 0;
+
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		if (title.equals("FAQ")) {
+			title="FAQBoard";
+			System.out.println("FAQ - selectAnythingListcount() 호출!");
+		}
+		if (title.equals("Mate")) { 
+			title="community_Mate";
+			System.out.println("Mate - selectAnythingListcount() 호출!");
+		}
+		if (title.equals("Tmi")) { 
+			title="community_Tmi";
+			System.out.println("Tmi - selectAnythingListcount() 호출!");
+		}
+		if (title.equals("Recipe")) {
+			title="community_Recipe";
+			System.out.println("Recipe - selectAnythingListcount() 호출!");
+
+		}
+		// 리스트와 검색창을 동시에 수행하는 메서드
+		// sql 구문 중요!
+		try {
+			String sql = "SELECT COUNT(*) FROM "+title+" WHERE nickname=? and subject LIKE ?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, nickName);
+			pstmt.setString(2, "%" + keyword + "%");
+			rs = pstmt.executeQuery();
+
+			if (rs.next()) {
+				listCount = rs.getInt(1);
+
+			}
+			System.out.println("selectTmiListCount() - " + listCount);
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println("SQL 구문 오류 발생! - selectAnythingListcount() " + e.getMessage());
+
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+
+		return listCount;
+	}
+
+	public ArrayList selectAnythingList(int pageNum, int listLimit, String title, String keyword,String nickName) {
+		System.out.println("----------------------------------------------");
+	
+		ArrayList BoardList=null;
+		if (title.equals("FAQ")) {
+			title="FAQBoard";
+			BoardList = new ArrayList<FAQDTO>();
+			System.out.println("FAQ - selectAnythingList() 호출!");
+		}
+		if (title.equals("Mate")) { 
+			title="community_Mate";
+			BoardList = new ArrayList<MateDTO>();
+			System.out.println("Mate - selectAnythingList() 호출!");
+		}
+		if (title.equals("Tmi")) { 
+			title="community_Tmi";
+			BoardList = new ArrayList<CommunityTmiDTO>();
+			System.out.println("Tmi - selectAnythingList() 호출!");
+		}
+		if (title.equals("Recipe")) {
+			title="community_Recipe";
+			BoardList = new ArrayList<RecipeDTO>();
+			System.out.println("Recipe - selectAnythingList() 호출!");
+
+		}
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		// 현재 페이지 번호를 활용하여 조회 시 시작행 번호를 계산
+		int startRow = (pageNum - 1) * listLimit;
+
+		// tmi게시판 전체리스트와 검색 기능을 함께 사용하는 SQL 구문!
+		try {
+			String sql = "SELECT * FROM "+title+" WHERE nickname=? and subject LIKE ? ORDER BY idx DESC LIMIT ?,?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1,  nickName );
+			pstmt.setString(2, "%" + keyword + "%");
+			pstmt.setInt(3, startRow);
+			pstmt.setInt(4, listLimit);
+
+			rs = pstmt.executeQuery();
+
+
+			// while문을 사용하여 조회 결과에 대한 반복 작업을 수행.
+			while (rs.next()) {
+				
+				if (title.equals("FAQBoard")) {
+					FAQDTO Board = new FAQDTO();
+					Board.setIdx(rs.getInt("idx"));
+						Board.setNickname(rs.getString("nickname"));
+						Board.setSubject(rs.getString("subject"));
+						Board.setContent(rs.getString("content"));
+						Board.setDate(rs.getDate("date"));
+						BoardList.add(Board);
+						System.out.println("FAQ - selectAnythingList() 호출!");
+				}
+				if (title.equals("community_Mate")) { 
+				
+					MateDTO Board = new MateDTO();
+					Board.setIdx(rs.getInt("idx"));
+					Board.setNickname(rs.getString("nickname"));
+					Board.setSubject(rs.getString("subject"));
+					Board.setContent(rs.getString("content"));
+					Board.setDate(rs.getTimestamp("datetime"));
+					System.out.println("FAQ - selectAnythingList() 호출!");
+				
+
+					BoardList.add(Board);
+				}
+				if (title.equals("community_Tmi")) { 
+					CommunityTmiDTO Board = new CommunityTmiDTO();
+					Board.setIdx(rs.getInt("idx"));
+					Board.setNickname(rs.getString("nickname"));
+					Board.setSubject(rs.getString("subject"));
+					Board.setContent(rs.getString("content"));
+					Board.setDate(rs.getTimestamp("datetime"));
+					System.out.println("Tmi - selectAnythingList() 호출!");
+					BoardList.add(Board);
+
+				
+				}
+				if (title.equals("community_Recipe")) {
+					
+					RecipeDTO Board = new RecipeDTO();
+					Board.setIdx(rs.getInt("idx"));
+					Board.setNickname(rs.getString("nickname"));
+					Board.setSubject(rs.getString("subject"));
+					Board.setContent(rs.getString("content"));
+					Board.setDatetime(rs.getTimestamp("datetime"));
+					BoardList.add(Board);
+					System.out.println("FAQ - selectAnythingList() 호출!");
+
+				}
+				
+			}
+			
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+			System.out.println("SQL구문 오류 발생! - selectAnythingList" + e.getMessage());
+
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		System.out.println("selectAnythingList - " + BoardList);
+		return BoardList;
+	}
+
 
 }
