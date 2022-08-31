@@ -7,6 +7,10 @@
 <title>Insert title here</title>
 </head>
 <body>
+	<!-- 헤더 들어가는 곳 -->
+		<jsp:include page="../../inc/header.jsp"/>
+	<!-- 헤더 들어가는 곳 -->
+
 	<!-- 게시판 등록 -->
 	<section>
 	<h1>community_mate.jsp</h1>
@@ -18,7 +22,7 @@
 
 				<tr>
 					<td>닉네임</td>
-					<td><input type="text" id="nickname" name="nickname" required="required"></td>
+					<td><input type="text" id="nickname" name="nickname" value="${sessionScope.sNickName }" required="required"></td>
 				</tr>
 				<tr>
 					<td>제목</td>
@@ -38,5 +42,9 @@
 			</section>
 		</form>
 	</section>
+	
+	<!-- 		푸터 들어가는 곳 -->
+	<jsp:include page="../../inc/footer.jsp"/>
+	<!-- 		푸터 들어가는 곳 -->
 </body>
 </html>

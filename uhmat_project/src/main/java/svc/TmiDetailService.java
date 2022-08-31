@@ -71,6 +71,7 @@ public class TmiDetailService {
 
 
 	// 댓글 리스트
+	// 답글 리스트와 동시 작업!
 	public ArrayList<TmiReplyDTO> getTmiReplyList(int idx) {
 		System.out.println("TmiDetailService - getTmiReplyList");
 		
