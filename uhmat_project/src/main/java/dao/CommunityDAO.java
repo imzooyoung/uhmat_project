@@ -173,7 +173,7 @@ public class CommunityDAO {
 			pstmt.setString(2, mate.getNickname());
 			pstmt.setString(3, mate.getSubject());
 			pstmt.setString(4, mate.getContent());
-			pstmt.setString(5, "N");
+			pstmt.setString(5, mate.getReport());
 
 			insertCount = pstmt.executeUpdate();
 		} catch (SQLException e) {
@@ -210,8 +210,6 @@ public class CommunityDAO {
 
 	// 1개 게시물의 상세 정보 조회 작업 수행하는 getMate() 메서드
 	public MateDTO getMate(int idx) {
-
-
 		MateDTO mate = null;
 
 		PreparedStatement pstmt = null;
@@ -1752,6 +1750,16 @@ public class CommunityDAO {
 		}
 		
 		return recipeSearchList;
+	}
+
+	public ArrayList<CommunityTmiDTO> selectMainTmiBoardList(String search) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public ArrayList<MateDTO> selectMainMateBoardList(String search) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 

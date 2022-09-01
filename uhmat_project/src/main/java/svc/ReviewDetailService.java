@@ -1,11 +1,14 @@
 package svc;
 
-import vo.ReviewBoardDTO;
-import static db.JdbcUtil.*;
+import static db.JdbcUtil.close;
+import static db.JdbcUtil.getConnection;
 
 import java.sql.Connection;
+import java.util.ArrayList;
 
 import dao.ReviewCategoryDAO;
+import vo.ReviewBoardDTO;
+import vo.ReviewReplyDTO;
 public class ReviewDetailService {
 
 	public ReviewBoardDTO getReviewBoard(int idx) {
@@ -31,6 +34,22 @@ public class ReviewDetailService {
 		return dto;
 	}
 
+	
+	public static ArrayList<ReviewReplyDTO> getDetailReply(int board_idx) {
+		System.out.println("ReviewReplyListService - getDetailReply");
 		
+		ArrayList<ReviewReplyDTO> replyList = null;
+		
+		Connection con = getConnection();
+		
+		ReviewCategoryDAO dao = ReviewCategoryDAO.getInstance();
+		
+		dao.setConnection(con);
+		
+		replyList = dao.selectDetailReplyList(board_idx);
+		
+		close(con);
+		return replyList;
+	}	
 
 }

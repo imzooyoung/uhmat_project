@@ -190,12 +190,14 @@ public class MemberDAO {
 	}
 
 	public boolean selectDuplicateNickName(String nickName) {
+		System.out.println("selectDuplicateNickName");
 		boolean isDuplicate = false;
 
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 
 		try {
+			System.out.println(nickName);
 			String sql = "SELECT nickName FROM member WHERE nickName=?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, nickName);
@@ -462,6 +464,7 @@ public class MemberDAO {
 						member.setPostCode(rs.getString("postcode"));
 						member.setAddress1(rs.getString("address1"));
 						member.setAddress2(rs.getString("address2"));
+						member.setBoardCount(listCount);
 						
 						System.out.println("member : " + member);
 						
@@ -643,7 +646,7 @@ public class MemberDAO {
 					Board.setSubject(rs.getString("subject"));
 					Board.setContent(rs.getString("content"));
 					Board.setDate(rs.getTimestamp("datetime"));
-					System.out.println("FAQ - selectAnythingList() 호출!");
+					System.out.println("Mate - selectAnythingList() 호출!");
 				
 
 					BoardList.add(Board);
@@ -669,7 +672,7 @@ public class MemberDAO {
 					Board.setContent(rs.getString("content"));
 					Board.setDatetime(rs.getTimestamp("datetime"));
 					BoardList.add(Board);
-					System.out.println("FAQ - selectAnythingList() 호출!");
+					System.out.println("Recipe - selectAnythingList() 호출!");
 
 				}
 				

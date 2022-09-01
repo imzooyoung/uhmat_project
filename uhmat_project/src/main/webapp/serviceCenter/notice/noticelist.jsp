@@ -7,129 +7,43 @@
 <head>
 <meta charset="UTF-8">
 <title>Notice 게시판</title>
+<script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&family=Poor+Story&display=swap" rel="stylesheet">
+<link href="css/notice/noticelist.css" rel="stylesheet">
 <style type="text/css">
-	#listForm {
-		width: 1024px;
-		max-height: 610px;
-		margin: auto;
-	}
 	
-	h2 {
-		text-align: center;
-	}
-	
-	table {
-		margin: auto;
-		width: 1024px;
-	}
-	
-	#tr_top {
-		background: black;
-		color: white;
-		text-align: center;
-	}
-	
-	table td {
-		text-align: center;
-	}
-	
-	#subject {
-		text-align: left;
-		padding-left: 20px;
-	}
-	
-	#pageList {
-		margin: auto;
-		width: 1024px;
-		text-align: center;
-	}
-	
-	#emptyArea {
-		margin: auto;
-		width: 1024px;
-		text-align: center;
-	}
-	
-	#buttonArea {
-		margin: auto;
-		width: 1024px;
-		text-align: right;
-	}
-	
-	table tr td {height: 35px;}
-	
-	.topButton{
-	position: relative;
-	float: left;
-/*     displays: flex; */
-    align-items: center;
-    justify-content: center;
-    margin: -1px 0 0 -1px;
-    padding: 0 10px;
-    height: 30px;
-    font-size: 20px;
-    color: #fff;
-    text-align: center;
-    line-height: 1.1;
-    text-decoration: none;
-    border: 1px solid #FFF;
-	background-color: black;
-	color:white;
-	}
-	
-	#keyword{
-		text-align: right;
-		
-	}
-	#bt {
-		background-color: black;
-		color:white;
-	}
-}
 </style>
 </head>
 <body>
-		<header>
 			<jsp:include page="../../inc/header.jsp"></jsp:include>
-		</header>
 		
-		<section id="listForm">
 		<h2>Notice</h2>
-		<input type="button" value="홈" onclick="location.href='index.jsp'">
 		
-		<div id="topButton">
-			<br>
-				<input type="button" class="topButton c1" value="전체" name="" onclick="location.href='NoticelistCategory.sc?name='+name">
-				<input type="button" class="topButton c2" value="알림" name="알림" onclick="location.href='NoticelistCategory.sc?name='+name">
-				<input type="button" class="topButton c3" value="보도기사" name="보도기사" onclick="location.href='NoticelistCategory.sc?name='+name">
-<!-- 				<section style="clear: both;"></section> -->
-			<br>
-		
-		<!-- 검색하기 기능 -->
-		<form action="NoticeList.sc" method="get" id="keyword">
-			<input type="text" placeholder="검색어를 입력하세요" name="keyword" value=${param.keyword }>
-			<input type="submit" value="검색" id="bt">
-		</form>
-		
+		<div id="menuBar" align="center">
+				<input type="button"  class="topButton" value="전체" name="" onclick="location.href='NoticelistCategory.sc?name='+name">
+				<input type="button" class="topButton" value="알림" name="알림" onclick="location.href='NoticelistCategory.sc?name='+name">
+				<input type="button" class="topButton" value="보도기사" name="보도기사" onclick="location.href='NoticelistCategory.sc?name='+name">	<section style="clear: both;"></section>
 		</div>
 		
-		<table border="1">
-			<tr id="tr_top">
-				<td width="150px">카테고리</td>
-				<td width="100px">번호</td>
+		<table class="noticeList">
+			<tr>
+				<td>카테고리</td>
+				<td>번호</td>
 				<td>제목</td>
-				<td width="150px">작성자</td>
-				<td width="150px">날짜</td>
+				<td>작성자</td>
+				<td>날짜</td>
 			</tr>
 			<!-- 게시물 목록 출력(단, 게시물이 하나라도 존재할 경우에만 출력) -> JSTL과 EL 활용-->
 			<!-- JSTL의 c:choose 태그를 사용하여 게시물 존재 여부 판별 -->
 			<!--  조건 : boardList 객체가 비어있지 않고 pageInfo 객체의 listCount가 0보다 클 경우 -->
-			<!--  제발 복습하자!!! -->
+				
 	 		<c:choose>
 	 			<c:when test="${not empty list and pageInfo.listCount gt 0 }">
 					<!-- c:foreach 태그를 사용하여 boardList 객체의 BoardDTO 객체를 꺼내서 출력 --> 				
 					<c:forEach var="notice" items="${list}"> 
-						<tr>
+						<tr class="noticeListTable">
 						 	<td>${notice.category }</td>
 							<td>${notice.idx }</td>
 							<td id="subject">
@@ -148,11 +62,25 @@
 	 		</c:choose>
 			
 		</table>
-		</section>
 		
+		<!-- 검색하기 기능 -->
+		<div align="center">
+		<form action="NoticeList.sc" class="search" method="get" id="keyword">
+			<input type="text" class="searchSection" placeholder="검색어를 입력하세요" name="keyword" value=${param.keyword }>
+			<input type="submit" value="검색">
+			
+		<c:if test="${sessionScope.sNickName eq 'admin'}"> 
+		<div style="position: static; left: 800px;">
+			<button type="button" class="noticeButton" onclick="location.href='NoticeWriteForm.sc'"/>글쓰기</button>
+		</div>
+		</c:if>
+		</form>
 		
+		<br>
 		
-		<section id="pageList">
+		</div>
+		
+		<div align="center">
 		<!-- 
 		현재 페이지 번호(pageNum)가 1보다 클 경우에만 [이전] 링크 동작
 		=> 클릭 시 BoardList.bo 서블릿 주소 요청하면서 
@@ -161,10 +89,10 @@
 			<c:choose>
 				<c:when test="${pageInfo.pageNum > 1}">
 	
-					<input type="button" value="이전" onclick="location.href='NoticeList.sc?pageNum=${pageInfo.pageNum - 1}&keyword=${param.keyword }'" id="bt">
+					<input type="button" value="이전" class="before_next"  onclick="location.href='NoticeList.sc?pageNum=${pageInfo.pageNum - 1}&keyword=${param.keyword }'" id="bt">
 				</c:when>
 				<c:otherwise>
-					<input type="button" value="이전" disabled="disabled" id="bt">
+					<input type="button" value="이전" class="before_next"  disabled="disabled" id="bt">
 				</c:otherwise>
 			</c:choose>
 				
@@ -184,16 +112,33 @@
 			<!-- 현재 페이지 번호(pageNum)가 총 페이지 수보다 작을 때만 [다음] 링크 동작 -->
 			<c:choose>
 				<c:when test="${pageInfo.pageNum lt pageInfo.maxPage }">
-					<input type="button" value="다음" onclick="location.href='NoticeList.sc?pageNum=${pageInfo.pageNum + 1}&keyword=${param.keyword }'" id="bt">
+					<input type="button" value="다음" class="before_next"  onclick="location.href='NoticeList.sc?pageNum=${pageInfo.pageNum + 1}&keyword=${param.keyword }'" id="bt">
 				</c:when>
 				<c:otherwise>
-					<input type="button" value="다음" disabled="disabled" id="bt">
+					<input type="button" value="다음" class="before_next"  disabled="disabled" id="bt">
 				</c:otherwise>
 			</c:choose>
-		</section>
-		<section id="buttonArea">
-			<input type="button" value="글쓰기" onclick="location.href='NoticeWriteForm.sc'" id="bt" />
-		</section>
+		</div>
+		
+		<jsp:include page="../../inc/footer.jsp"/>
+		
+		<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+		crossorigin="anonymous"></script>
+
+	<!-- Bootstrap core JS-->
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+
+	<!-- Core theme JS-->
+	<script src="js/scripts.js"></script>
+
+	<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+	<!-- * *                               SB Forms JS                               * *-->
+	<!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
+	<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+	<script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
 </body>
 </html>
 

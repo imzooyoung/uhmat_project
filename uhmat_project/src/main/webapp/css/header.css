@@ -1,19 +1,21 @@
 @charset "UTF-8";
 
-#container {
+#headerContainer {
 /* 	border: 1px solid #ccc; */
-	width: 995px;
-	margin: 0 auto;
+/* 	width: 995px; */
+/* 	margin: 0 auto; */
 /* 	display: flex; */
 }
 
-header {
+#uhmatHeader {
 	background-color: white;
-	height: 115px;
-	width: 995px;
+	height: 100px;
+/* 	width: 995px; */
 /* 	border: solid 1px; */
 	position: relative;
 	align-items: center; 
+/* 	border-top: 20px solid #FF4A4A; */
+	border-bottom: 20px solid #FF1818;
 }
 
 .mainLogo > a > img {
@@ -23,12 +25,97 @@ header {
 	width: auto;
 	height: auto;
 	background-size: cover;
+	margin-left: 1em;
+	z-index: 999999999999999;
+	margin-top: 7px;
 }
+
+/* .search { */
+/* 	height: 300px; */
+/* 	background-image: url("/uhmat_project/image/mainSample3.jpg"); */
+/* 	position:relative; */
+/* 	border: solid 1px; */
+/* 	background-size: cover; */
+/* 	top: 115px; */
+/* 	background-repeat: no-repeat; */
+/* 	background-position: center center ; */
+/* 	width: 100% */
+/* } */
+
+/* .searchControl { */
+/* 	float: right; */
+/* 	position: relative; */
+/* 	width: 700px; */
+/* 	height: 40px;  */
+/* 	border-radius: 2em; */
+/* 	border-color: white; */
+/* 	align-items: center; */
+/* 	padding-left: 40px; */
+/* 	left: 70%; */
+/* } */
+
+/* .searchContainer { */
+/* 	position: relative; */
+/* 	left: 800px; */
+/* } */
+
+.pullRight {
+	position: relative;
+}
+
+.searchControl {
+	position: relative;
+	width: 400px;
+	height: 30px;
+	padding-left: 35px;
+	left: 600px;
+	top: 27px;
+	border-radius: 20px;
+/* 	border-color: #FF4A4A; */
+}
+
+::placeholder {
+	position:relative;
+	left: 0px;
+	font-size: 16px;
+	top: 2px;
+}
+
+i{
+	position: relative;
+	top: 30px;
+	left: 635px;
+	z-index: 999;
+	
+}
+
+
+.searchContainer .icon {
+	position: albsolute;
+	top: 50%;
+	margin-left: 15px;
+	margin-top: 15px;
+}
+
+#searchBtn {
+	position: relative;
+	border-radius: 20px;
+	background-color: #FF1818; 
+	color: white;
+	border-color: #FF1818;
+	font-size: 16px;
+	width: 60px;
+	height: 27.5px;
+	top: 27.5px;
+	left: 535.5px;
+}
+
 
 .loginPart {
 	float: right;
 /* 	margin-right: 15em; */
-	margin-top: 1.5em;
+	margin-top: 2em;
+	margin-right: 1em;
 }
 
 .loginPart > a {
@@ -39,11 +126,12 @@ header {
 
 .topMenu {
 	position: absolute;
-	margin-top: 5em;
-	background-color: #FF4A4A;
-	width: 995px;
-	border-radius: 10px;
-	height: 35px;
+	margin-top: 1.85em;
+	background-color: transparent;
+/* 	border: 1px solid; */
+/* 	height: 35px; */
+	width: 500px;
+	left: 285px;
 }
 
 .topMenu > ul {
@@ -62,10 +150,9 @@ header {
 	display: inline;
 	clear:both;
 /* 	border: 1px solid red; */
-	margin-right: 2em;
-	font-size: 1.25em;
-	margin-left: 3.6em;
-	
+/* 	margin-right: 2em; */
+/* 	margin-left: 3.6em; */
+	font-size: 1.25em;	
 }
 
 .dropdown {
@@ -74,10 +161,14 @@ header {
 }
 
 .dropdown > a {
-	color: white;
+/* 	color: #FF4A4A; */
+	color: black;
 	text-decoration: none;
 	vertical-align: middle;
-	text-shadow: 1px 1px 1px gray;
+	padding: 7px;
+	font-weight: bold;
+/* 	text-shadow: 1px 1px 1px gray; */
+	
 	
 }
 
@@ -85,12 +176,11 @@ header {
 	display: none;
 	position: absolute;
 	left: 0px;
-	background-color: rgb(194,205,47);
-		
+	background-color: #FF1818;		
 }
 
 .dropdownContent ul {
-	border: 1px solid rgb(49,132,77);
+	border: 1px solid #FF1818;
 	padding: 0;
 }
 
@@ -118,11 +208,11 @@ header {
 
 .dropdown:hover .dropdownContent {
 	display:block;
-	z-index: 999;
+	z-index: 9999999 !important;
 }
 
 .dropdownContent ul li:hover {
-	background-color: rgb(49,132,77);
+	background-color: orange;
 	cursor: pointer;
 }
 

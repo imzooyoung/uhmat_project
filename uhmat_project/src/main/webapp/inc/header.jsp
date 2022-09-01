@@ -19,8 +19,8 @@
 </script> 
 </head>
 <body>
-<div id="container">
-	<header>
+<div id="headerContainer">
+	<header id="uhmatHeader">
 		<!-- 로고 들어가는 곳 시작 -->
     	<div class="mainLogo">
     		<a href="/uhmat_project/"><img src="image/uhmatMainLogo.jpg"></a>
@@ -31,12 +31,12 @@
 		<div class="loginPart">
 		<c:choose>
 			<c:when test="${empty sessionScope.sNickName}">
-				<a href="MemberLogin.me">로그인</a> | <a href="MemberJoinForm.me">회원가입</a>
+				<a href="MemberLogin.me">로그인</a>&nbsp; <a href="MemberJoinForm.me">회원가입</a>
 			</c:when>
 			<c:otherwise>
 				<%-- 하이퍼링크에 자바스크립트 함수 연결 시 href 속성에 아무 경로도 지정하지 않는 방법 --%>
 				<a href="MemberDetailForm.me?nickName=${sessionScope.sNickName }">${sessionScope.sNickName }
-					님 </a>  | <a href="MemberLogout.me">로그아웃</a>
+					님 </a>&nbsp; <a href="MemberLogout.me">로그아웃</a>
 				<%-- 세션 아이디가 "admin" 일 때만 관리자페이지 링크("AdminMain.me") 표시 --%>
 				<c:if test="${sessionScope.sNickName eq 'admin'}"> | <a
 						href="AdminMain.me">관리자페이지</a>
@@ -101,9 +101,7 @@
     		<a href="./event/NewFile.jsp">이벤트</a>
     			<div class="dropdownContent">
 				<ul>
-					<li><a href="./event/NewFile.jsp">이벤트</a></li>
-					<li><a href="#">어맛 MBTI</a></li>
-					<li><a href="#">어맛룰렛/사다리</a></li>
+					<li><a href="#">어맛룰렛</a></li>
 				</ul>	
 				</div>
   	  	</div>
@@ -117,7 +115,6 @@
 				<ul>
 					<li><a href="NoticeList.sc">공지사항</a></li>
 					<li><a href="FAQList.sc">FAQ</a></li>
-					<li><a href="LiveTalkList.sc">1 대 1 라이브 채팅</a></li>
 				</ul>	
 				</div>
   	  	</div>
@@ -125,9 +122,35 @@
 	  		
   	</ul>
     </div>
+    
+    <div class="headerLine">
     	
-	
-	
+    </div>
+    	
+	<!-- 검색 창 부분 시작 -->
+	<div class="searchContainer">
+		<div class="row">
+		<!-- 검색 버튼 눌렀을 때 mainController 로 통해 uhmatSearch 페이지로 가게끔 구현해야함 -->
+			<form method="post" name="search" action="UhmatSearch.sch">
+				<table class="pullRight">
+					<tr>
+						<td>
+							<i class="fa-solid fa-magnifying-glass" style="font-size: 1.1em"></i>
+							<input class="searchControl" type="search" id="searchControl"
+								placeholder="검색할 음식명이나 음식점명" name="searchText" value="" maxlength="100" autocomplete="off">
+						</td>
+						<td>
+							<button id="searchBtn" type="submit" title="검색"
+							    class="submitBtn">
+								<span class="blind">검색</span>
+								<span class="searchIconSubmit"></span>
+							</button>
+						</td>
+					</tr>
+				</table>
+			</form>
+		</div>
+	</div>
 	<!-- 검색 창 부분 끝 -->
     
    	</header>
