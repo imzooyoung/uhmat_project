@@ -41,13 +41,13 @@
 				</td>
 			</tr>
 			<tr>
-				<td>${faq.content }</td>
+				<td>${notice.content }</td>
 			</tr>
 	
 		</table>
 	
 	<div class="btn">
-		<c:if test="${sessionScope.sNickName == faq.nickname }">	
+		<c:if test="${sessionScope.sNickName == notice.nickname }">	
 			<input type="button" value="수정" onclick="location.href='NoticeModifyForm.sc?idx=${notice.idx}&pageNum=${param.pageNum}'">
 			<input type="button" value="삭제" onclick="location.href='NoticeDelete.sc?idx=${notice.idx}&pageNum=${param.pageNum}'">
 		</c:if>

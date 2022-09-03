@@ -6,31 +6,10 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
-	rel="stylesheet"
-	integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
-	crossorigin="anonymous">
-
-<!-- Favicon-->
-<link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
-<!-- Font Awesome icons (free version)-->
-<script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js"
-	crossorigin="anonymous"></script>
-<!-- Google fonts-->
-<link
-	href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&family=Poor+Story&display=swap"
-	rel="stylesheet">
-
-<!-- Core theme CSS (includes Bootstrap)-->
-<link href="css/styles.css" rel="stylesheet" />
-
-
-<script src='https://kit.fontawesome.com/a076d05399.js'
-	crossorigin='anonymous'></script>
-	
+<script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&family=Poor+Story&display=swap" rel="stylesheet">
 <link href="css/tmi/tmiList.css" rel="stylesheet"/>
 </head>
 <body>
@@ -39,14 +18,12 @@
 	<jsp:include page="../../inc/header.jsp" />
 	<!-- 헤더 들어가는 곳 -->
 
-<section id="tableAndButton">
 	<!-- 배너, 메뉴바 -->
-	<div align="center">
+	<div align="center" class="tmiBanner">
 		<img alt="TMI 배너" src="./image/tmi/tmi_banner.png">
 	</div>
 
-	<div align="center" id="menuBar"
-		style="position: relative; right: 0px; top: -40px;">
+	<div align="center" id="menuBar">
 		<button onclick="location.href='MateList.co'">mate_list</button>
 		<button onclick="location.href='TmiList.co'">tmi_list</button>
 		<button onclick="location.href='RecipeList.co'">recipte_list</button>
@@ -57,16 +34,13 @@
 
 	<!-- 게시판리스트 -->
 	<table class="tmiList">
-		<thead>
-			<tr>
+			<tr id="font_front">
 				<th scope="col">제목</th>
 				<th scope="col">작성자</th>
 				<th scope="col">조회수</th>
 				<th scope="col">등록일</th>
 			</tr>
-		</thead>
 
-		<tbody>
 			<c:choose>
 				<c:when
 					test="${not empty tmiBoardList and tmiPageInfo.listCount gt 0 }">
@@ -101,25 +75,19 @@
 					</tr>
 				</c:otherwise>
 			</c:choose>
-		</tbody>
-	</table>
-	</section>
-	
 	<!-- 버튼 창 -->
-		<span class="buttonWrite">
-			<button type="button" class="tmiButton"
-				onclick="location.href='TmiWriteForm.co'">글쓰기</button>
-			<button type="button" class="tmiButton" onclick="location.href='./'">메인</button>
-		</span>
+		<tr>
+			<td id="plus"><i class='fas fa-plus-circle' style='position:static; font-size:48px; color: #AAAAAA;' onclick="location.href='TmiWriteForm.co'"/></i></td>
+		</tr>
+	</table>
+	
 	<br>
 	
 	<!-- 검색 창 -->
 	<div align="center">
-		<form class="search">
-			<input type="text" class="search" placeholder="Search" name="keyword" value="${param.keyword }"> 
+		<form class="search" class="search" >
+			<input type="text" placeholder="Search" name="keyword" value="${param.keyword }"> 
 			<input class="searchIcon" type="submit" value="검색">	
-				
-	
 		</form>
 	</div>
 
@@ -176,22 +144,5 @@
 	<jsp:include page="../../inc/footer.jsp" />
 	<!-- 푸터 들어가는 곳 -->
 
-	<script
-		src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-		integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
-		crossorigin="anonymous"></script>
-
-	<!-- Bootstrap core JS-->
-	<script
-		src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-
-	<!-- Core theme JS-->
-	<script src="js/scripts.js"></script>
-
-	<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
-	<!-- * *                               SB Forms JS                               * *-->
-	<!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
-	<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
-	<script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
 </body>
 </html>

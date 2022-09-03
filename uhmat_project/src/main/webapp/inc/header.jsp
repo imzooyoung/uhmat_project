@@ -23,7 +23,7 @@
 	<header id="uhmatHeader">
 		<!-- 로고 들어가는 곳 시작 -->
     	<div class="mainLogo">
-    		<a href="/uhmat_project/"><img src="image/uhmatMainLogo.jpg"></a>
+    		<a href="/uhmat_project/"><img src="image/uhmatMainLogo.png"></a>
     	</div>
 		<!-- 로고 들어가는 곳 끝 -->
 		
@@ -38,7 +38,7 @@
 				<a href="MemberDetailForm.me?nickName=${sessionScope.sNickName }">${sessionScope.sNickName }
 					님 </a>&nbsp; <a href="MemberLogout.me">로그아웃</a>
 				<%-- 세션 아이디가 "admin" 일 때만 관리자페이지 링크("AdminMain.me") 표시 --%>
-				<c:if test="${sessionScope.sNickName eq 'admin'}"> | <a
+				<c:if test="${sessionScope.sNickName eq 'admin'}"> &nbsp; <a
 						href="AdminMain.me">관리자페이지</a>
 				</c:if>
 			</c:otherwise>
@@ -71,11 +71,9 @@
     		<a href="ReviewList.re">어맛리뷰</a>
     			<div class="dropdownContent">
 				<ul>
-					<li><a href="#">link2</a></li>
-					<li><a href="#">link2</a></li>
-					<li><a href="#">link2</a></li>
-					<li><a href="#">link2</a></li>
-					<li><a href="#">link2</a></li>
+					<li><a href="ReviewList.re">어맛리뷰</a></li>
+					<li><a href="resCategory.re">카테고리별 리뷰</a></li>
+					<li><a href="mapForm.re">지도로 찾기</a></li>
 				</ul>	
 				</div>
   	  	</div>
@@ -137,7 +135,7 @@
 						<td>
 							<i class="fa-solid fa-magnifying-glass" style="font-size: 1.1em"></i>
 							<input class="searchControl" type="search" id="searchControl"
-								placeholder="검색할 음식명이나 음식점명" name="searchText" value="" maxlength="100" autocomplete="off">
+								placeholder="검색할 음식명이나 음식점명" name="search" value="" maxlength="100" autocomplete="off">
 						</td>
 						<td>
 							<button id="searchBtn" type="submit" title="검색"

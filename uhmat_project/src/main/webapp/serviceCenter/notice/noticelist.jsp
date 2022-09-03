@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
  <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-    
 <!DOCTYPE html>
 <html>
 <head>
@@ -42,7 +41,7 @@
 	 		<c:choose>
 	 			<c:when test="${not empty list and pageInfo.listCount gt 0 }">
 					<!-- c:foreach 태그를 사용하여 boardList 객체의 BoardDTO 객체를 꺼내서 출력 --> 				
-					<c:forEach var="notice" items="${list}"> 
+					<c:forEach var="notice" items="${list }"> 
 						<tr class="noticeListTable">
 						 	<td>${notice.category }</td>
 							<td>${notice.idx }</td>
@@ -70,9 +69,9 @@
 			<input type="submit" value="검색">
 			
 		<c:if test="${sessionScope.sNickName eq 'admin'}"> 
-		<div style="position: static; left: 800px;">
+			<div style="position: static; left: 800px;">
 			<button type="button" class="noticeButton" onclick="location.href='NoticeWriteForm.sc'"/>글쓰기</button>
-		</div>
+			</div>
 		</c:if>
 		</form>
 		

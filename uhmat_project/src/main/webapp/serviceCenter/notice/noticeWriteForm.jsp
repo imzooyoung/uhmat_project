@@ -70,7 +70,7 @@
 				</div>
 				
 			<div class="form-floating mb-3">
-				<select class="form-select form-select-sm" aria-label=".form-select-sm example">
+				<select name="category" class="form-select form-select-sm" aria-label=".form-select-sm example">
 				  <option value="알림">알림</option>
 				  <option value="보도기사">보도기사</option>
 				</select>			

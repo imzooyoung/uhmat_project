@@ -11,49 +11,8 @@
 <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
-<style type="text/css">
-	
-	.view {
-		padding: 20px 20px 20px 20px;
-		border-left: 1px solid #ccc;
-		border-right: 1px solid #ccc;
-		margin: auto;
-		width: 800px;
-		text-align: left;
-	}
-	
-	
-	.subject {
-		font-size: x-large;
-	}
-	
-	.nickname_time_readcount {
-		font-size: small;
-	}
-	
-	.btn input {
-		border: 2px solid #7FB77E;
-		background-color: white;
-		color: #7FB77E;
-		padding: 5px;
-		border-radius: 5px
-	}
-	
-	.btn input:hover {
-		background-color: #7FB77E;
-		color: white;
-	}
-	
-	.reply {
-		border-bottom: 2px solid #ccc;
-	}
-	
-	.nickname_time_readcount>i {
-		position: static;
-	}
+<link href="css/mate/mateView.css" rel="stylesheet">
 
-
-</style>
 </head>
 <body>
 	<!-- 		헤더 들어가는 곳 -->
@@ -66,7 +25,7 @@
 				<td class="subject">${mate.subject }</td> 
 			</tr>
 			<tr>
-				<td class="nickname_time_readcount"><i class='fas fa-user-alt'></i> ${mate.nickname } | <i class="fa fa-clock-o"></i> ${mate.date } | <i class='far fa-eye'></i> ${mate.readcount }</td> 
+				<td class="nickname_time_readcount"><i class='fas fa-user-alt'></i> ${mate.nickname } | <i class="fa fa-clock-o"></i> ${mate.datetime } | <i class='far fa-eye'></i> ${mate.readcount }</td> 
 			</tr>
 			<tr>
 				<td>${mate.content }</td>
@@ -93,7 +52,7 @@
 			<tr>
 				<td>
 					<c:forEach begin="1" end="${mateReplyList.re_lev }">
-						&nbsp;&nbsp;<i class="material-icons" style="position:static; font-size:20px; color:#7FB77E">subdirectory_arrow_right</i>
+						&nbsp;&nbsp;<i class="material-icons" style="font-size:20px;color:#FF1818">subdirectory_arrow_right</i>
 					</c:forEach>
 					${mateReplyList.nickname } | ${mateReplyList.date }
 				</td>
