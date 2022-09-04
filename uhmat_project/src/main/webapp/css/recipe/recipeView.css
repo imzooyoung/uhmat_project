@@ -36,3 +36,12 @@
 	.reply {
 		border-bottom: 2px solid #ccc;
 	}
+	
+	.nickname_time_readcount>i{
+ 		position: static;
+	}
+	
+	.material-icons {
+		position: static;
+	}
+	

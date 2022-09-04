@@ -1,6 +1,6 @@
 @charset "UTF-8";
 	#menuBar button {
- 		background-color: #717171;
+ 		background-color: #6C757D;
  		color: white;
 		padding: 5px;
 		border-radius: 5px;
@@ -11,7 +11,7 @@
 	
 	#menuBar button:hover {
 		background-color :white;
-		color: #717171;
+		color: #6C757D;
 	}
 	
 	h2 {
@@ -46,17 +46,23 @@
 
 	.search input { 
  		padding: 3px; 
-		border: 2px solid #717171;
-		background-color:white;
-		color: #717171;
+		border: 2px solid #6C757D;;
+		background-color:white;;
+		color: #6C757D;;
 		border-radius: 5px;
 		font-family: 'Poor Story', cursive;
 /* 		font-weight: bold; */
 	}
 	
+	.searchBtn:hover {
+		background-color: #6C757D;
+		color : white;
+		cursor: pointer;
+	}
+	
 	.before_next {
-		border: 2px solid #717171;
-		background-color: #717171;
+		border: 2px solid #6C757D;
+		background-color: #6C757D;
 		border-radius: 2px;
 		color: white;
 		font-family: 'Poor Story', cursive;
@@ -64,12 +70,12 @@
 	
 	.before_next:hover {
 		background-color: white;
-		color : #717171;
+		color : #6C757D;
 		cursor: pointer;
 	}
 	
 	.topButton {
-		background-color: #717171;
+		background-color: #6C757D;
 		padding: 5px;
 		border-radius: 5px;
 		color: white;
@@ -78,12 +84,12 @@
 	
 	.topButton:hover {
 		background-color: white;
-		color: #717171;
+		color: #6C757D;
 	}
 	
 	.faqButton {
-		border: 2px solid #717171;
-		background-color: #717171;
+		border: 2px solid #6C757D;
+		background-color: #6C757D;
 		color: white;
 		padding: 5px;
 		border-radius: 5px;
@@ -92,7 +98,7 @@
 	
 	.faqButton:hover {
 		background-color: white;
-		color: #717171;
+		color: #6C757D;
 		cursor: pointer;
 	}
 	

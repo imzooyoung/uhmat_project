@@ -48,37 +48,28 @@ h2 {
 }
 
 td.link:hover{
-	background-color: #808080;
+	background-color: #6C757D;
 	cursor: pointer;
 }
 
-.search input {
-	padding: 5px; 
-	border: 2px solid #c6c6c6;
+.search {
+	padding: 3px; 
+	border: 2px solid #6C757D;
 	background-color:white;
-	color: #717171;
+	color: #6C757D;
 	border-radius: 5px;
 /* 	font-family: 'Poor Story', cursive; */
 }
 
-.searchIcon {
-	padding: 2px;
-	border: 5px solid #717171;
-	background-color: #717171;
-	color: #FF1818;
-	border-radius: 5px;
-	color: white;
-}
-
-.searchIcon:hover {
-	background-color: white;
-	color : #717171;
+#searchIcon:hover {
+	background-color: #6C757D;;
+	color : white;
 	cursor: pointer;
 }
 
 .before_next {
-	border: 2px solid #717171;
-	background-color: #717171;
+	border: 2px solid #6C757D;;
+	background-color: #6C757D;
 	border-radius: 2px;
 	color: white;
 	font-family: 'Poor Story', cursive;
@@ -86,7 +77,7 @@ td.link:hover{
 
 .before_next:hover {
 	background-color: white;
-	color : #717171;
+	color : #6C757D;
 	cursor: pointer;
 }
 
@@ -95,18 +86,4 @@ td.link:hover{
 	margin: 0px;
 	position: relative;
 	left: 590px;
-}
-
-.tmiButton {
-	border: 2px solid #717171;
-	background-color: white;
-	color: #FF1818;
-	padding: 5px;
-	border-radius: 5px;
-	font-family: 'Poor Story', cursive;
-}
-
-.tmiButton:hover {
-	background-color: #FF1818;
-	color: white;
 }

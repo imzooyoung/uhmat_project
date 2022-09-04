@@ -1452,15 +1452,15 @@ public class CommunityDAO {
 			}
 			
 			// 답글을 mate_reply 테이블에 INSERT 작업
-			sql = "INSERT INTO recipe_reply VALUES(?,?,?,?,?,?,now(),?)";
+			sql = "INSERT INTO recipe_reply VALUES(?,?,?,?,?,?,?,now())";
 			pstmt2 = con.prepareStatement(sql);
 			pstmt2.setInt(1, num);
 			pstmt2.setString(2, recipeReply.getNickname());
-			pstmt2.setString(3, recipeReply.getContent());
-			pstmt2.setInt(4, num);
-			pstmt2.setInt(5, 0);
+			pstmt2.setInt(3, recipeReply.getBoard_idx());
+			pstmt2.setString(4, recipeReply.getContent());
+			pstmt2.setInt(5, recipeReply.getRe_ref());
 			pstmt2.setInt(6, 0);
-			pstmt2.setInt(7, recipeReply.getBoard_idx());
+			pstmt2.setInt(7, 0);
 			System.out.println(recipeReply);
 			
 			insertCount = pstmt2.executeUpdate();
@@ -1644,15 +1644,15 @@ public class CommunityDAO {
 			RecipeRereplyInsertCount = pstmt2.executeUpdate();
 			
 			// 답글을 mate_reply 테이블에 INSERT 작업
-			sql = "INSERT INTO recipe_reply VALUES(?,?,?,?,?,?,now(),?)";
+			sql = "INSERT INTO recipe_reply VALUES(?,?,?,?,?,?,?,now())";
 			pstmt3 = con.prepareStatement(sql);
 			pstmt3.setInt(1, num);
 			pstmt3.setString(2, recipeRereply.getNickname());
-			pstmt3.setString(3, recipeRereply.getContent());
-			pstmt3.setInt(4, recipeRereply.getRe_ref());
-			pstmt3.setInt(5, recipeRereply.getRe_lev() + 1);
-			pstmt3.setInt(6, recipeRereply.getRe_seq() + 1);
-			pstmt3.setInt(7, recipeRereply.getBoard_idx());
+			pstmt3.setInt(3, recipeRereply.getBoard_idx());
+			pstmt3.setString(4, recipeRereply.getContent());
+			pstmt3.setInt(5, recipeRereply.getRe_ref());
+			pstmt3.setInt(6, recipeRereply.getRe_lev() + 1);
+			pstmt3.setInt(7, recipeRereply.getRe_seq() + 1);
 //			System.out.println(mateReply);
 			RecipeRereplyInsertCount = pstmt3.executeUpdate();
 			

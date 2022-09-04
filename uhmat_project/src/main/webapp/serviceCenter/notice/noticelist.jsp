@@ -63,13 +63,13 @@
 		<!-- 검색하기 기능 -->
 		<div align="center">
 		<form action="NoticeList.sc" class="search" method="get" id="keyword">
-			<input type="text" class="searchSection" placeholder="검색어를 입력하세요" name="keyword" value=${param.keyword }>
-			<input type="submit" value="검색">
+			<input type="text" placeholder="search" name="keyword" value=${param.keyword }>
+			<input type="submit" class="searchBtn" value="검색">
 			
 		<c:if test="${sessionScope.sNickName eq 'admin'}"> 
 			<div style="position: static; left: 800px;">
 			<br>
-			<button type="button" class="noticeButton" onclick="location.href='NoticeWriteForm.sc'">글쓰기</button>
+			<button type="button" class="noticeButton"  onclick="location.href='NoticeWriteForm.sc'">글쓰기</button>
 			</div>
 		</c:if>
 		</form>

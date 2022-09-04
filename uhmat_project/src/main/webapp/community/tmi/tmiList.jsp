@@ -84,9 +84,9 @@
 	
 	<!-- 검색 창 -->
 	<div align="center">
-		<form class="search" class="search" >
-			<input type="text" placeholder="Search" name="keyword" value="${param.keyword }"> 
-			<input class="searchIcon" type="submit" value="검색">	
+		<form>
+			<input class="search" type="text" placeholder="Search" name="keyword" value="${param.keyword }"> 
+			<input class="search" id="searchIcon" type="submit" value="검색">	
 		</form>
 	</div>
 

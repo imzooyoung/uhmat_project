@@ -17,7 +17,9 @@
 		<!-- 헤더 들어가는곳 -->
 		<jsp:include page="../inc/header.jsp"></jsp:include>
 		<!-- 헤더 들어가는곳 -->
+		
 		<h1 style="text-align: center; font-size: 50px">고객센터</h1>
+		
 		<!-- 왼쪽 사이드바 -->
 		<div style="padding:30px; background:#fafafa;" id="sidebar">
 					<div class="sub_left_menu noto400 font_15">
@@ -25,13 +27,6 @@
 						<a href="FAQList.sc">FAQ</a>
 					</div>
 		</div>
-		
-		
-		<!-- 검색창 코드팬 -->
-
-		
-		
-		<!-- 검색창 코드팬 -->
 
 	<div class="clear"></div>
 
@@ -55,8 +50,7 @@
 					<table class="faqList">
 						<c:forEach var="faq" items="${faq5 }">
 							<tr>
-								<td><a
-									href="FAQDetail.sc?idx=${faq.idx}&pageNum=1&keyword=">${faq.subject }</a></td>
+								<td><a href="FAQDetail.sc?idx=${faq.idx}&pageNum=1&keyword=">${faq.subject }</a></td>
 							</tr>
 						</c:forEach>
 					</table>
@@ -68,8 +62,8 @@
 					<c:forEach var="notice" items="${notice5 }">
 						<table class="noticeList">
 							<tr>
-								<td><a
-									href="NoticeDetail.sc?idx=${notice.idx}&pageNum=1&keyword=">${notice.subject }</a></td>
+								<td>
+								<a href="NoticeDetail.sc?idx=${notice.idx}&pageNum=1&keyword=">${notice.subject }</a></td>
 							</tr>
 						</table>
 					</c:forEach>

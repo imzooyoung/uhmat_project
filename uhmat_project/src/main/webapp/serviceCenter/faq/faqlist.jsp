@@ -80,8 +80,8 @@
 		<!-- 검색하기 기능 -->
 		<div align="center">
 			<form action="FAQList.sc" class="search" method="get" id="keyword">
-				<input type="text" class="searchSection" placeholder="검색어를 입력하세요" name="keyword" value=${param.keyword }>
-				<input type="submit" value="검색" >
+				<input type="text" placeholder="search" name="keyword" value=${param.keyword }>
+				<input type="submit" class="searchBtn" value="검색" >
 			
 		
 			<!-- 버튼 창 -->
