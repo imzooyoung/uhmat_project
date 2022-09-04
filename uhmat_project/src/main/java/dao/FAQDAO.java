@@ -355,4 +355,45 @@ public class FAQDAO {
 		return list;
 	}
 
+	public ArrayList<FAQDTO> selectSVFAQList() {
+		ArrayList<FAQDTO> list = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		
+		try {
+			String sql = "SELECT * FROM FAQBoard ORDER BY idx DESC LIMIT 5";
+			pstmt = con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			
+			list = new ArrayList<FAQDTO>();
+			
+			while(rs.next()) {
+				FAQDTO faq = new FAQDTO();
+				faq.setContent(rs.getString("content"));
+				faq.setDate(rs.getDate("date"));
+				faq.setIdx(rs.getInt("idx"));
+				faq.setNickname(rs.getString("nickname"));
+				faq.setOriginal_File(rs.getString("original_File"));
+				faq.setReal_File(rs.getString("real_File"));
+				faq.setSubject(rs.getString("subject"));
+				faq.setCategory(rs.getString("category"));
+				faq.setReadcount(rs.getInt("readcount"));
+				faq.setCategory(rs.getString("category"));
+				
+				list.add(faq);
+				
+			}
+			System.out.println("list : " + list);
+			
+		} catch (SQLException e) {
+			System.out.println("SQL 구문 오류 발생! -  " + e.getMessage());
+			e.printStackTrace();
+		} finally {
+			JdbcUtil.close(rs);
+			JdbcUtil.close(pstmt);
+		}
+		return list;
+	}
+
 }

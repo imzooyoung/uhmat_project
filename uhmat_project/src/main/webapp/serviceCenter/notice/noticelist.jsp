@@ -45,10 +45,8 @@
 						<tr class="noticeListTable">
 						 	<td>${notice.category }</td>
 							<td>${notice.idx }</td>
-							<td id="subject">
-								<a href="NoticeDetail.sc?idx=${notice.idx}&pageNum=${pageInfo.pageNum}">
+							<td class="link" width="350" height="50" onclick="location.href='NoticeDetail.sc?idx=${notice.idx}&pageNum=${pageInfo.pageNum}'">
 									${notice.subject }
-								</a>
 							</td>
 							<td>${notice.nickname }</td>
 							<td>${notice.date }</td>
@@ -70,7 +68,8 @@
 			
 		<c:if test="${sessionScope.sNickName eq 'admin'}"> 
 			<div style="position: static; left: 800px;">
-			<button type="button" class="noticeButton" onclick="location.href='NoticeWriteForm.sc'"/>글쓰기</button>
+			<br>
+			<button type="button" class="noticeButton" onclick="location.href='NoticeWriteForm.sc'">글쓰기</button>
 			</div>
 		</c:if>
 		</form>

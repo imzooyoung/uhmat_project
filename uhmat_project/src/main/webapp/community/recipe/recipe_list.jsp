@@ -45,8 +45,8 @@
 			<c:when test="${not empty recipeList and pageInfo.listCount gt 0 and empty recipeSearchPageInfo.listCount}">
 				<c:forEach var="recipe" items="${recipeList }">
 					<tr class="recipeListTable">
-						<td><img src="recipe_upload/${recipe.real_File1 }" onerror="this.onerror=null; this.src='image/recipe/recipe_default_img.png';" width="100" ></td>
-						<td class="link" width="350" height="50"><a href="RecipeDetail.co?idx=${recipe.idx }&pageNum=${pageInfo.pageNum}">${recipe.subject }</a></td>
+						<td><img src="./upload/recipe_upload/${recipe.real_File1 }" onerror="this.onerror=null; this.src='image/recipe/recipe_default_img.png';" width="100" ></td> 
+						<td class="link" width="350" height="50" onclick="location.href='RecipeDetail.co?idx=${recipe.idx }&pageNum=${pageInfo.pageNum}'">${recipe.subject }</td>
 						<td>${recipe.nickname }</td>
 						<td>${recipe.readcount }</td>  
 						<td>${recipe.datetime }</td>

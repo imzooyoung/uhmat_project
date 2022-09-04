@@ -27,11 +27,11 @@
 			</table>
 				<div>
 <!-- 				onerror="this.style.display='none';" img alt 아이콘 없애는 기능 -->
-					<img src="recipe_upload/${recipe.real_File1 }" width="150" onerror="this.style.display='none';">
-					<img src="recipe_upload/${recipe.real_File2 }" width="150" onerror="this.style.display='none';">
-					<img src="recipe_upload/${recipe.real_File3 }" width="150" onerror="this.style.display='none';">
-					<img src="recipe_upload/${recipe.real_File4 }" width="150" onerror="this.style.display='none';">
-					<img src="recipe_upload/${recipe.real_File5 }" width="150" onerror="this.style.display='none';">
+					<img src="./upload/recipe_upload/${recipe.real_File1 }" width="150" onerror="this.style.display='none';">
+	               	<img src="./upload/recipe_upload/${recipe.real_File2 }" width="150" onerror="this.style.display='none';">
+	              	<img src="./upload/recipe_upload/${recipe.real_File3 }" width="150" onerror="this.style.display='none';">
+	             	<img src="./upload/recipe_upload/${recipe.real_File4 }" width="150" onerror="this.style.display='none';">
+	              	<img src="./upload/recipe_upload/${recipe.real_File5 }" width="150" onerror="this.style.display='none';">
 				</div>
 			<table>
 			<tr>

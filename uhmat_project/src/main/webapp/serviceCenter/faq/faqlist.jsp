@@ -16,7 +16,7 @@
 
 </head>
 <body>
-		
+	
 		<jsp:include page="../../inc/header.jsp"></jsp:include>
 		
 		<h2>FAQ</h2>
@@ -26,7 +26,6 @@
 				<input type="button"  class="topButton" value="오류신고" name="오류신고" onclick="location.href='FAQlistCategory.sc?name='+name">
 				<input type="button"  class="topButton" value="음식점등록" name="음식점등록" onclick="location.href='FAQlistCategory.sc?name='+name">
 				<input type="button"  class="topButton" value="지도 오류" name="지도 오류" onclick="location.href='FAQlistCategory.sc?name='+name">
-<!-- 				<section style="clear: both;"></section> -->
 		</div>
 		
 		<table class="faqList">
@@ -37,6 +36,7 @@
 				<td>작성자</td>
 				<td>날짜</td>
 				<td>조회수</td>
+				<td>첨부파일</td>
 			</tr>
 			
 			<!-- 게시물 목록 출력(단, 게시물이 하나라도 존재할 경우에만 출력) -> JSTL과 EL 활용-->
@@ -51,11 +51,9 @@
 							<td>${FAQ.idx }</td>
 								<c:choose>
 									<c:when test="${not empty sessionScope.sNickName }">
-							<td class="link" width="350" height="50" onclick="location.href='FAQDetail.sc?idx=${FAQ.idx}&pageNum=${pageInfo.pageNum}&keyword=${param.keyword}'">
-<%-- 									<a href="FAQDetail.sc?idx=${FAQ.idx}&pageNum=${pageInfo.pageNum}&keyword=${param.keyword}"> --%>
+									<td class="link" width="350" height="50" onclick="location.href='FAQDetail.sc?idx=${FAQ.idx}&pageNum=${pageInfo.pageNum}&keyword=${param.keyword}'">
 										${FAQ.subject }
-<!-- 									</a> -->
-							</td>
+									</td>
 									</c:when>
 									<c:otherwise>
 									${FAQ.subject }
@@ -64,6 +62,9 @@
 							<td>${FAQ.nickname }</td>
 							<td>${FAQ.date }</td>
 							<td>${FAQ.readcount }</td>
+							<c:if test="${not empty FAQ.real_File }"> 
+								<td> <i class='fas fa-link' style='font-size:20px; color:blue'></i></td> 
+							</c:if>
 						</tr>
 						</c:forEach>
 	 			</c:when>
@@ -74,17 +75,19 @@
 			
 		</table>
 		
+		<br>
+		
 		<!-- 검색하기 기능 -->
 		<div align="center">
 			<form action="FAQList.sc" class="search" method="get" id="keyword">
 				<input type="text" class="searchSection" placeholder="검색어를 입력하세요" name="keyword" value=${param.keyword }>
 				<input type="submit" value="검색" >
 			
-		<br>
 		
 			<!-- 버튼 창 -->
 			<c:if test="${not empty sessionScope.sNickName }"> 
 			<div style="position: static; left: 800px;">
+			<br>
 			<button type="button" class="faqButton"
 				onclick="location.href='FAQWriteForm.sc'">글쓰기</button>
 			<button type="button" class="faqButton" onclick="location.href='./'">메인</button>
@@ -94,6 +97,9 @@
 		</div>
 		
 		<br>
+		
+		<!-- ---------------------------------------------- -->
+		
 		
 		<div align="center">
 			<c:choose>
