@@ -1,10 +1,8 @@
 @charset "UTF-8";
 
 #headerContainer {
-/* 	border: 1px solid #ccc; */
-/* 	width: 995px; */
-/* 	margin: 0 auto; */
-/* 	display: flex; */
+	width: 100%;
+	height: 100%;
 }
 
 #uhmatHeader {
@@ -15,19 +13,26 @@
 	position: relative;
 	align-items: center; 
 /* 	border-top: 20px solid #FF4A4A; */
+/* 	border-bottom: 20px solid #FF4A4A; */
 	border-bottom: 20px solid #FF1818;
+/* 	border-bottom: 20px solid rgb(247,0,30); */
 }
+
+
 
 .mainLogo > a > img {
 	float: left;
-	max-width: 400px;
-	max-height:75px;
+	max-width: 600px;
+	max-height:90px;
 	width: auto;
 	height: auto;
 	background-size: cover;
-	margin-left: 1em;
+	background-color: transparent;
+	margin-left: 0.75em;
 	z-index: 999999999999999;
-	margin-top: 7px;
+/* 	background-image: url("image/uhmatMainLogo.png"); */
+/* 	background-repeat: repeat-x; */
+/* 	margin-top: 3px; */
 }
 
 /* .search { */
@@ -65,12 +70,12 @@
 
 .searchControl {
 	position: relative;
-	width: 400px;
+	width: 500px;
 	height: 30px;
-	padding-left: 35px;
-	left: 600px;
+	padding-left: 32px;
+	left: 590px;
 	top: 27px;
-	border-radius: 20px;
+	border-radius: 10px;
 /* 	border-color: #FF4A4A; */
 }
 
@@ -81,17 +86,15 @@
 	top: 2px;
 }
 
-i{
+header i {
 	position: relative;
 	top: 30px;
-	left: 635px;
+	left: 623px;
 	z-index: 999;
-	
 }
 
-
 .searchContainer .icon {
-	position: albsolute;
+	position: relative;
 	top: 50%;
 	margin-left: 15px;
 	margin-top: 15px;
@@ -99,19 +102,20 @@ i{
 
 #searchBtn {
 	position: relative;
-	border-radius: 20px;
-	background-color: #FF1818; 
+	border-radius: 5px;
+	background-color: #FF1818;; 
 	color: white;
 	border-color: #FF1818;
 	font-size: 16px;
 	width: 60px;
 	height: 27.5px;
 	top: 27.5px;
-	left: 535.5px;
+	left: 525px;
 }
 
 
 .loginPart {
+	position: relative;
 	float: right;
 /* 	margin-right: 15em; */
 	margin-top: 2em;
@@ -121,6 +125,7 @@ i{
 .loginPart > a {
 	text-decoration: none;
 	font-size: 14px;
+	position: relative;
 }
 
 
@@ -131,7 +136,7 @@ i{
 /* 	border: 1px solid; */
 /* 	height: 35px; */
 	width: 500px;
-	left: 285px;
+	left: 230px;
 }
 
 .topMenu > ul {
@@ -212,7 +217,7 @@ i{
 }
 
 .dropdownContent ul li:hover {
-	background-color: orange;
+	background-color: #FFC300;
 	cursor: pointer;
 }
 

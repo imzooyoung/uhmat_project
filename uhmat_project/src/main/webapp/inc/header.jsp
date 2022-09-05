@@ -8,7 +8,7 @@
 <title>Insert title here</title>
 <link href="${pageContext.request.contextPath}/css/header.css" rel="stylesheet" type="text/css">
 <script src="https://kit.fontawesome.com/5382a0d7e0.js" crossorigin="anonymous"></script>
-
+<script src="js/jquery-3.6.0.js"></script>
 <script type="text/javascript">
 	function confirmLogout() {
 		if(confirm("로그아웃 하시겠습니까?")) { // 확인 : true, 취소 : false 리턴됨
@@ -39,7 +39,7 @@
 					님 </a>&nbsp; <a href="MemberLogout.me">로그아웃</a>
 				<%-- 세션 아이디가 "admin" 일 때만 관리자페이지 링크("AdminMain.me") 표시 --%>
 				<c:if test="${sessionScope.sNickName eq 'admin'}"> &nbsp; <a
-						href="AdminMain.me">관리자페이지</a>
+						href="AdminMain.ad">관리자페이지</a>
 				</c:if>
 			</c:otherwise>
 		</c:choose>
@@ -72,7 +72,7 @@
     			<div class="dropdownContent">
 				<ul>
 					<li><a href="ReviewList.re">어맛리뷰</a></li>
-					<li><a href="resCategory.re">카테고리별 리뷰</a></li>
+					<li><a href="restaurantList.re">식당 리스트</a></li>
 					<li><a href="mapForm.re">지도로 찾기</a></li>
 				</ul>	
 				</div>

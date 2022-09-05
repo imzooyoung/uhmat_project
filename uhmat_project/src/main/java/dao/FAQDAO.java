@@ -102,14 +102,16 @@ public class FAQDAO {
 		
 		try {
 
-			String sql = "UPDATE FAQBoard SET nickname=?, subject=?, content=?, category=? WHERE idx=?";
+			String sql = "UPDATE FAQBoard SET nickname=?, subject=?, content=?, category=?, original_File=?, real_File=? WHERE idx=?";
 
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, faq.getNickname());
 			pstmt.setString(2, faq.getSubject());
 			pstmt.setString(3, faq.getContent());
 			pstmt.setString(4, faq.getCategory());
-			pstmt.setInt(5, faq.getIdx());
+			pstmt.setString(5, faq.getOriginal_File());
+			pstmt.setString(6, faq.getReal_File());
+			pstmt.setInt(7, faq.getIdx());
 			updateCount = pstmt.executeUpdate();
 			System.out.println(updateCount);
 			
@@ -313,48 +315,6 @@ public class FAQDAO {
 		return list;
 	}
 	
-	public ArrayList<FAQDTO> selectMainAnythingList(String search) {
-		ArrayList<FAQDTO> list = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		
-		
-		try {
-			String sql = "SELECT * FROM FAQBoard WHERE subject LIKE ?";
-			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, '%'+search+'%');
-			rs = pstmt.executeQuery();
-			
-			list = new ArrayList<FAQDTO>();
-			
-			while(rs.next()) {
-				FAQDTO faq = new FAQDTO();
-				faq.setContent(rs.getString("content"));
-				faq.setDate(rs.getDate("date"));
-				faq.setIdx(rs.getInt("idx"));
-				faq.setNickname(rs.getString("nickname"));
-				faq.setOriginal_File(rs.getString("original_File"));
-				faq.setReal_File(rs.getString("real_File"));
-				faq.setSubject(rs.getString("subject"));
-				faq.setCategory(rs.getString("category"));
-				faq.setReadcount(rs.getInt("readcount"));
-				faq.setCategory(rs.getString("category"));
-				
-				list.add(faq);
-				
-			}
-			System.out.println("list : " + list);
-			
-		} catch (SQLException e) {
-			System.out.println("SQL 구문 오류 발생! -  " + e.getMessage());
-			e.printStackTrace();
-		} finally {
-			JdbcUtil.close(rs);
-			JdbcUtil.close(pstmt);
-		}
-		return list;
-	}
-
 	public ArrayList<FAQDTO> selectSVFAQList() {
 		ArrayList<FAQDTO> list = null;
 		PreparedStatement pstmt = null;

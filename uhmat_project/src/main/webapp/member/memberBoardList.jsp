@@ -139,7 +139,7 @@
 						<c:if test="${param.title =='Recipe'}">
 						<td ><a href="RecipeDetail.co?idx=${AllList.idx }&pageNum=1"> ${AllList.idx }</a></td>
 						</c:if>
-							
+							<td >${AllList.idx }</td>
 							<td>${AllList.subject }</td>
 							<td>${AllList.nickname }</td>
 							<td>${AllList.date }</td>
@@ -154,11 +154,7 @@
 		</section>
 		
 		<section id="pageList">
-		<!-- 
-		현재 페이지 번호(pageNum)가 1보다 클 경우에만 [이전] 링크 동작
-		=> 클릭 시 BoardList.bo 서블릿 주소 요청하면서 
-		   현재 페이지 번호(pageNum) - 1 값을 page 파라미터로 전달
-		-->
+	
 			<c:choose>
 				<c:when test="${pageInfo.pageNum > 1}">
 					<input type="button" value="이전" onclick="location.href='MemberBoardList.me?pageNum=${pageInfo.pageNum - 1}&keyword=${param.keyword }'">

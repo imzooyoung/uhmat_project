@@ -8,15 +8,18 @@
 	width: 800px;
 	text-align: left;
 	font-family: 'Poor Story', cursive;
+	
 }
 
+#subject {
+		font-size: xx-large;
+	}
+	
+#content {
+		font-size: large;
+	}
 
-.subject {
-	font-size: x-large;
-	font-family: 'Poor Story', cursive;
-}
-
-.nickname_time_readcount {
+.time_readcount {
 	font-size: small;
 }
 

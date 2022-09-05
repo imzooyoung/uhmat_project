@@ -77,7 +77,7 @@
 			</c:choose>
 	<!-- 버튼 창 -->
 		<tr>
-			<td id="plus"><i class='fas fa-plus-circle' style='position:static; font-size:48px; color: #AAAAAA;' onclick="location.href='TmiWriteForm.co'"/></i></td>
+			<td id="plus"><i class='fas fa-plus-circle' style='position:static; font-size:48px; color: #6C757D;' onclick="location.href='TmiWriteForm.co'"/></i></td>
 		</tr>
 	</table>
 

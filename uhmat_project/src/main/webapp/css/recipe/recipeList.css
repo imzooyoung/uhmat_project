@@ -5,6 +5,7 @@
 	margin: 0 auto;
 	width: 50%;
 	position:relative;
+	
 }
 
 #menuBar button {
@@ -68,12 +69,34 @@ border-radius: 10px;
 
 .search input {
 	padding: 5px; 
-	border: 2px solid #c6c6c6;
+	border: 2px solid #6C757D;
 	background-color:white;
-	color: #717171;
+	color: #6C757D;
 	border-radius: 5px;
 	font-family: 'Poor Story', cursive;
 	font-weight: bold;
+}
+
+.searchBtn input {
+	padding: 5px; 
+	border: 2px solid #6C757D;
+	background-color:#6C757D;
+	color: #6C757D;
+	border-radius: 5px;
+	font-family: 'Poor Story', cursive;
+	font-weight: bold;
+	
+}
+
+.searchBtn input:hover {
+	padding: 5px; 
+	border: 2px solid #6C757D;
+	background-color:white;
+	color: #6C757D;
+	border-radius: 5px;
+	font-family: 'Poor Story', cursive;
+	font-weight: bold;
+	
 }
 
 
@@ -81,13 +104,13 @@ border-radius: 10px;
 	border-bottom: none;
 	margin: 0px;
 	position: relative;
-	left: 700px;
+	left: 455px;
 }
-	
+
 	
 .before_next {
-	border: 5px solid #717171;
-	background-color: #717171;
+	border: 3px solid #6C757D;
+	background-color: #6C757D;
 	border-radius: 5px;
 	color: white;
 	font-family: 'Poor Story', cursive;
@@ -98,3 +121,4 @@ border-radius: 10px;
 	color : #717171;
 	cursor: pointer;
 }
+

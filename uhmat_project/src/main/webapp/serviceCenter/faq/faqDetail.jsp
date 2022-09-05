@@ -22,7 +22,7 @@
 	<!-- 헤더 들어가는 곳 -->
 
 	<div class="view">
-		<table width="800">
+		<table>
 			<tr>
 				<td class="subject">${faq.subject }</td> 
 			</tr>

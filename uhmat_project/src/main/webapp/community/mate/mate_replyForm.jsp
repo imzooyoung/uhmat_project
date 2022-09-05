@@ -1,18 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-	
-	<!-- Favicon-->
-	<link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
-	<!-- Font Awesome icons (free version)-->
-	<script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
- 	<!-- Google fonts-->
+	<!-- Google fonts-->
 	<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
 	<link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
 
@@ -20,6 +14,7 @@
 	<link href="css/styles.css" rel="stylesheet" />
 </head>
 <body>
+	
 	<!-- 헤더 들어가는 곳 -->
 	<jsp:include page="../../inc/header.jsp"/>
 	<!-- 헤더 들어가는 곳 -->
@@ -45,6 +40,13 @@
                         <!-- To make this form functional, sign up at-->
                         <!-- https://startbootstrap.com/solution/contact-forms-->
                         <!-- to get an API token!-->
+		
+		<c:if test="${sessionScope.sNickName eq null }">
+				<script type="text/javascript">
+					alert("로그인을 하시오.");
+					history.back();
+				</script>
+			</c:if>
 		<form action="MateReplyWrite.co?idx=${param.idx }&pageNum=${param.pageNum}" name="replyForm" method="post">
 <!-- 		<input type="hidden" name="nickname" value="admin"> -->
 		<input type="hidden" name="idx" value="${param.idx }">
@@ -62,7 +64,7 @@
 			</div>
 			
 			<div align="right">
-				<input type="submit" value="댓글 전송" class="btn btn-primary">
+				<input type="submit" value="댓글 전송" class="btn btn-secondary">
 			</div>
 			
 		</form>
@@ -75,19 +77,6 @@
 	<jsp:include page="../../inc/footer.jsp"/>
 	<!-- 푸터 들어가는 곳 -->
 	
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-
-	<!-- Bootstrap core JS-->
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-	
-	<!-- Core theme JS-->
-	<script src="js/scripts.js"></script>
-	
-	<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
-	<!-- * *                               SB Forms JS                               * *-->
-	<!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
-	<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
-	<script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
 					
 </body>
 </html>

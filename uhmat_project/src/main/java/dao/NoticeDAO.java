@@ -101,12 +101,15 @@ public class NoticeDAO {
 		PreparedStatement pstmt = null;
 		
 		try {
-			String sql = "UPDATE NoticeBoard SET nickname=?, subject=?, content=? WHERE idx=?";
+			String sql = "UPDATE NoticeBoard SET nickname=?, subject=?, content=?, category=?, original_File=?, real_File=? WHERE idx=?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, notice.getNickname());
 			pstmt.setString(2, notice.getSubject());
 			pstmt.setString(3, notice.getContent());
-			pstmt.setInt(4, notice.getIdx());
+			pstmt.setString(4, notice.getCategory());
+			pstmt.setString(5, notice.getOriginal_File());
+			pstmt.setString(6, notice.getReal_File());
+			pstmt.setInt(7, notice.getIdx());
 			
 			updateCount = pstmt.executeUpdate();
 //			System.out.println(updateCount);
@@ -274,46 +277,6 @@ public class NoticeDAO {
 				notice.setCategory(rs.getString("category"));
 				
 				list.add(notice);
-			}
-//			System.out.println("list : " + list);
-			
-		} catch (SQLException e) {
-			System.out.println("SQL 구문 오류 발생! -  " + e.getMessage());
-			e.printStackTrace();
-		} finally {
-			JdbcUtil.close(rs);
-			JdbcUtil.close(pstmt);
-		}
-		return list;
-	}
-	
-	public ArrayList<NoticeDTO> selectMainAnythingList(String search) {
-		ArrayList<NoticeDTO> list = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		
-		
-		try {
-			String sql = "SELECT * FROM NoticeBoard WHERE subject LIKE ? ";
-			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, '%'+search+'%');
-			rs = pstmt.executeQuery();
-			
-			list = new ArrayList<NoticeDTO>();
-			
-			while(rs.next()) {
-				NoticeDTO notice = new NoticeDTO();
-				notice.setContent(rs.getString("content"));
-				notice.setDate(rs.getDate("date"));
-				notice.setIdx(rs.getInt("idx"));
-				notice.setNickname(rs.getString("nickname"));
-				notice.setOriginal_File(rs.getString("original_File"));
-				notice.setReal_File(rs.getString("real_File"));
-				notice.setSubject(rs.getString("subject"));
-				notice.setCategory(rs.getString("category"));
-				
-				list.add(notice);
-				
 			}
 //			System.out.println("list : " + list);
 			
